@@ -1,17 +1,73 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import {
+  IonContent,
+  IonHeader,
+  IonInput,
+  IonItem,
+  IonLabel,
+  IonList,
+  IonPage,
+  IonSelect, IonSelectOption,
+  IonTitle,
+  IonToolbar
+} from '@ionic/react';
 import ExploreContainer from '../components/ExploreContainer';
 import './Tab3.css';
+import React, {useState} from "react";
 
 const Tab3: React.FC = () => {
+  const [serial, setSerial] = useState<string>();
+  const [name, setName] = useState<string>();
+  const [set, setSetName] = useState<string>();
+  const [info, setInfo] = useState<string>();
+  const [time, setTime] = useState<string>();
   return (
     <IonPage>
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
+        <IonHeader>
           <IonToolbar>
-            <IonTitle size="large">Tab 3</IonTitle>
+            <IonTitle class="ion-text-center">Add Item</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <ExploreContainer name="Tab 3 page" />
+
+        <IonItem>
+          <IonLabel position="stacked">Name</IonLabel>
+          <IonInput value={name} placeholder="Enter Name" onIonChange={e => setName(e.detail.value!)}> </IonInput>
+        </IonItem>
+
+        <IonItem>
+          <IonLabel position="stacked">Serial Number</IonLabel>
+          <IonInput value={serial} placeholder="Enter Serial" onIonChange={e => setSerial(e.detail.value!)}> </IonInput>
+        </IonItem>
+
+        <IonItem>
+          <IonLabel position="stacked">Set Name</IonLabel>
+          <IonInput value={set} placeholder="Enter Set Name" onIonChange={e => setSetName(e.detail.value!)}> </IonInput>
+        </IonItem>
+
+        {/*location怎么弄呢*/}
+
+        <IonList>
+          <IonItem>
+            <IonLabel position="stacked">Return Time</IonLabel>
+            <IonSelect interface="popover" placeholder="Select return time">
+              <IonSelectOption value="apples">Daily</IonSelectOption>
+              <IonSelectOption value="apples">Weekly</IonSelectOption>
+              <IonSelectOption value="apples">Two Weeks</IonSelectOption>
+              <IonSelectOption value="oranges">Monthly</IonSelectOption>
+              <IonSelectOption value="bananas">Three Months</IonSelectOption>
+            </IonSelect>
+          </IonItem>
+        </IonList>
+
+        <IonItem>
+          <IonLabel position="stacked">Info</IonLabel>
+          <IonInput value={info} placeholder="More info.." onIonChange={e => setInfo(e.detail.value!)}> </IonInput>
+        </IonItem>
+
+
+
+
+
       </IonContent>
     </IonPage>
   );

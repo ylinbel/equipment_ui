@@ -1,12 +1,12 @@
 import { Redirect, Route } from 'react-router-dom';
 import {
-  IonApp,
-  IonIcon,
+  IonApp, IonButtons, IonHeader,
+  IonIcon, IonItem,
   IonLabel,
   IonRouterOutlet,
   IonTabBar,
   IonTabButton,
-  IonTabs,
+  IonTabs, IonTitle, IonToolbar,
   setupIonicReact
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
@@ -14,7 +14,17 @@ import MyHome from './pages/MyHome';
 import MyItem from './pages/MyItem';
 import MyList from './pages/MyList';
 import MyCenter from './pages/MyCenter';
-import { musicalNote, power, calendar, personCircle, map, informationCircle } from 'ionicons/icons';
+import Register from "./pages/Register";
+import {
+  musicalNote,
+  power,
+  calendar,
+  personCircle,
+  map,
+  informationCircle,
+  homeOutline,
+  searchOutline, personCircleOutline, listOutline
+} from 'ionicons/icons';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -34,6 +44,8 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import Login from "./pages/Login";
+import Tab3 from "./pages/Tab3";
 
 setupIonicReact();
 
@@ -57,24 +69,33 @@ const App: React.FC = () => (
           <Route exact path="/">
             <Redirect to="/tab1" />
           </Route>
+          <Route exact path="/register">
+            <Register />
+          </Route>
+          <Route exact path="/login">
+            <Login />
+          </Route>
+          <Route exact path="/tab3">
+            <Tab3 />
+          </Route>
         </IonRouterOutlet>
 
+        <IonHeader class="ion-text-center">
+          <h3>Dynamics Lab</h3>
+        </IonHeader>
+
         <IonTabBar slot="bottom">
-          <IonTabButton tab="myhome" href="/myhome">
-            <IonIcon icon={musicalNote} />
-            <IonLabel>首页</IonLabel>
-          </IonTabButton>
           <IonTabButton tab="myitem" href="/myitem">
-            <IonIcon icon={power} />
-            <IonLabel>我的器材</IonLabel>
+            <IonIcon icon={listOutline} />
+            <IonLabel>List</IonLabel>
           </IonTabButton>
-          <IonTabButton tab="mylist" href="/mylist">
-            <IonIcon icon={informationCircle} />
-            <IonLabel>消息</IonLabel>
+          <IonTabButton tab="myhome" href="/myhome">
+            <IonIcon icon={searchOutline} />
+            <IonLabel>Search</IonLabel>
           </IonTabButton>
             <IonTabButton tab="mycenter" href="/mycenter">
-              <IonIcon icon={personCircle} />
-              <IonLabel>我的</IonLabel>
+              <IonIcon icon={personCircleOutline} />
+              <IonLabel>Me</IonLabel>
             </IonTabButton>
         </IonTabBar>
 
