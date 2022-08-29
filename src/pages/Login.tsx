@@ -10,6 +10,7 @@ import React, {useState} from "react";
 import {Route} from "react-router-dom";
 import MyHome from "./MyHome";
 import Register from "./Register";
+import './MyHome.css';
 // import {IonDatetimeButton} from '@ionic/react';
 
 
@@ -25,7 +26,7 @@ const Login: React.FC = () => {
                 </Route>
             </IonRouterOutlet>
             <IonContent>
-                <IonHeader className="ion-no-border">
+                <IonHeader>
                     <IonToolbar>
                         <IonTitle class="ion-text-center">Welcome To Dynamics Lab</IonTitle>
                     </IonToolbar>
@@ -42,9 +43,10 @@ const Login: React.FC = () => {
                     <IonInput value={password} placeholder="Enter Password" onIonChange={e => setPassword(e.detail.value!)}> </IonInput>
                 </IonItem>
 
-                <IonButton fill="outline" expand="block">Login</IonButton>
-                <IonButton fill="outline">forget password</IonButton> <br/>
-                <IonButton fill="outline" href="/register">register</IonButton>
+                <IonButton strong expand="block">Login</IonButton>
+                <br/>
+                <IonButton fill="clear" strong size="small">Forget password?</IonButton> <br/>
+                <IonButton fill="clear" strong size="small" href="/register">Register</IonButton>
 
 
 

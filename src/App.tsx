@@ -16,13 +16,6 @@ import MyList from './pages/MyList';
 import MyCenter from './pages/MyCenter';
 import Register from "./pages/Register";
 import {
-  musicalNote,
-  power,
-  calendar,
-  personCircle,
-  map,
-  informationCircle,
-  homeOutline,
   searchOutline, personCircleOutline, listOutline
 } from 'ionicons/icons';
 
@@ -46,8 +39,12 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import Login from "./pages/Login";
 import Tab3 from "./pages/Tab3";
+import Tab4 from "./pages/Tab4";
+import Tab5 from "./pages/Tab5";
+import UserManagement from "./pages/UserManagement";
 
 setupIonicReact();
+
 
 const App: React.FC = () => (
   <IonApp>
@@ -77,6 +74,15 @@ const App: React.FC = () => (
           </Route>
           <Route exact path="/tab3">
             <Tab3 />
+          </Route>
+          <Route exact path="/tab4">
+            <Tab4 />
+          </Route>
+          <Route exact path="/tab5">
+            <Tab5 />
+          </Route>
+          <Route exact path="/um">
+            <UserManagement />
           </Route>
         </IonRouterOutlet>
 

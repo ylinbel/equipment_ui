@@ -4,7 +4,7 @@ import {
     IonPage,
     IonTitle,
     IonToolbar,
-    IonItem, IonInput, IonLabel, IonModal, IonDatetime, IonButton
+    IonItem, IonInput, IonLabel, IonModal, IonButton, useIonPicker, IonCard,
 } from '@ionic/react';
 import React, {useState} from "react";
 // import {IonDatetimeButton} from '@ionic/react';
@@ -16,11 +16,14 @@ const Register: React.FC = () => {
     const [name, setName] = useState<string>();
     const [password, setPassword] = useState<string>();
     const [repassword, setRePassword] = useState<string>();
+    const [date, setDate] = useState<string>();
     const [number, setNumber] = useState<number>();
+    const [present] = useIonPicker();
+    const [value, setValue] = useState('');
     return (
         <IonPage>
             <IonContent>
-                <IonHeader className="ion-no-border">
+                <IonHeader>
                     <IonToolbar>
                         <IonTitle class="ion-text-center">Welcome To Dynamics Lab</IonTitle>
                     </IonToolbar>
@@ -32,12 +35,12 @@ const Register: React.FC = () => {
                 </IonItem>
 
                 <IonItem>
-                    <IonLabel position="stacked">Email</IonLabel>
+                    <IonLabel position="stacked" inputMode="email">Email</IonLabel>
                     <IonInput value={email} placeholder="Enter Email" onIonChange={e => setEmail(e.detail.value!)}> </IonInput>
                 </IonItem>
 
                 <IonItem>
-                    <IonLabel position="stacked">Password</IonLabel>
+                    <IonLabel position="stacked" typeof="password">Password</IonLabel>
                     <IonInput value={password} placeholder="Enter Password" onIonChange={e => setPassword(e.detail.value!)}> </IonInput>
                 </IonItem>
 
@@ -46,17 +49,55 @@ const Register: React.FC = () => {
                     <IonInput value={repassword} placeholder="Enter Password" onIonChange={e => setRePassword(e.detail.value!)}> </IonInput>
                 </IonItem>
 
+                <IonItem>
+                    <IonLabel position="stacked">Leaving Date</IonLabel>
+                    <IonInput value={date} placeholder="DD/MM/YYYY" onIonChange={e => setDate(e.detail.value!)}> </IonInput>
+                </IonItem>
 
-                {/*<IonDatetimeButton datetime="datetime"/>*/}
+                {/*check date format*/}
 
-                {/*<IonModal keepContentsMounted={true}>*/}
-                {/*    <IonDatetime id="datetime"></IonDatetime>*/}
-                {/*</IonModal>*/}
+                <br/>
+                <IonButton strong expand="block">Register</IonButton>
 
-                {/*need to check password to be the same as the reenter one */}
-                {/*need to check email format*/}
 
-                <IonButton fill="outline">Register</IonButton>
+                {/*<IonButton size="small"*/}
+                {/*    onClick={() =>*/}
+                {/*        present(*/}
+                {/*            [*/}
+                {/*                {*/}
+                {/*                    name: 'animal',*/}
+                {/*                    options: [*/}
+                {/*                        { text: 'Dog', value: 'dog' },*/}
+                {/*                        { text: 'Cat', value: 'cat' },*/}
+                {/*                        { text: 'Bird', value: 'bird' },*/}
+                {/*                    ],*/}
+                {/*                },*/}
+                {/*                {*/}
+                {/*                    name: 'vehicle',*/}
+                {/*                    options: [*/}
+                {/*                        { text: 'Car', value: 'car' },*/}
+                {/*                        { text: 'Truck', value: 'truck' },*/}
+                {/*                        { text: 'Bike', value: 'bike' },*/}
+                {/*                    ],*/}
+                {/*                },*/}
+                {/*            ],*/}
+                {/*            [*/}
+                {/*                {*/}
+                {/*                    text: 'Confirm',*/}
+                {/*                    handler: (selected) => {*/}
+                {/*                        setValue(`${selected.animal.value}, ${selected.vehicle.value}`)*/}
+                {/*                    },*/}
+                {/*                },*/}
+                {/*            ]*/}
+                {/*        )*/}
+                {/*    }*/}
+                {/*>*/}
+                {/*    Show Picker using para*/}
+                {/*</IonButton>*/}
+                {/*{value && (*/}
+                {/*    <div>Selected Value: {value}</div>*/}
+                {/*)}*/}
+
 
 
 

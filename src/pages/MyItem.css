@@ -1,1 +1,7 @@
 .text-center{text-align: center}
+::slotted([slot="end"]) {
+    margin: unset;
+}
+ion-button {
+    margin-inline-start: 0px;
+}

@@ -16,7 +16,7 @@ import './Tab3.css';
 import './MyItem.css';
 import React, {useState} from "react";
 
-const Tab3: React.FC = () => {
+const Tab5: React.FC = () => {
   const [serial, setSerial] = useState<string>();
   const [name, setName] = useState<string>();
   const [set, setSetName] = useState<string>();
@@ -27,7 +27,7 @@ const Tab3: React.FC = () => {
       <IonContent fullscreen>
         <IonHeader>
           <IonToolbar>
-            <IonTitle class="ion-text-center">Add Item</IonTitle>
+            <IonTitle class="ion-text-center">Update Item</IonTitle>
           </IonToolbar>
         </IonHeader>
 
@@ -71,7 +71,8 @@ const Tab3: React.FC = () => {
           <IonInput value={info} placeholder="More info.." onIonChange={e => setInfo(e.detail.value!)}> </IonInput>
         </IonItem>
 
-        <IonButton strong expand="block">Add</IonButton>
+        <IonButton strong expand="block">Update</IonButton>
+
 
 
 
@@ -83,4 +84,4 @@ const Tab3: React.FC = () => {
   );
 };
 
-export default Tab3;
+export default Tab5;

@@ -1,2 +1,36 @@
 .img{width: 100px; height: 100px}
 .ion-text-wrap{white-space: normal}
+ion-button {
+    text-transform: none;
+}
+ion-title {
+    text-transform: none;
+    font-weight: bold;
+    font-family:Tahoma ;
+}
+ion-item {
+    font-family:SansSerif ;
+    font-style:normal;
+}
+/*::placeholder {*/
+/*    font: 13px/3 Tahoma;*/
+/*}*/
+/*ion-select::placeholder {*/
+/*    font: 13px/3 Tahoma;*/
+/*}*/
+ion-select-option::placeholder {
+    font-family: Tahoma;
+    color: green;
+}
+ion-select{
+    --placeholder-font: 13px !important;
+    color:black;
+}
+p {
+    font-family:SansSerif ;
+    font-style:normal;
+}
+
+
+
+

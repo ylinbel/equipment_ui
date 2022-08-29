@@ -2,106 +2,86 @@ import {
     IonContent,
     IonHeader,
     IonPage,
-    IonImg,
     IonTitle,
     IonToolbar,
-    IonCard,
-    IonCardHeader,
-    IonCardSubtitle,
-    IonCardTitle,
-    IonCardContent,
-    IonItem,
-    IonIcon,
-    IonLabel,
     IonButton,
-    IonSearchbar
+    IonSearchbar, IonItem, IonList, IonLabel
 } from '@ionic/react';
-import { pin, wifi, wine, warning, walk } from 'ionicons/icons';
-import ExploreContainer from '../components/ExploreContainer';
-import imgBox from '../img/box.png';
-import imgTable from '../img/table.png';
-import imgElebox from '../img/ele-box.png';
+// import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner';
 import './MyHome.css';
 import React from "react";
+import axios from "axios";
 
-const MyHome: React.FC = () => {
-  return (
-    <IonPage>
-        <IonContent>
-        <IonHeader className="ion-no-border">
-            <IonToolbar>
-                <IonTitle class="ion-text-center">Search</IonTitle>
-            </IonToolbar>
-        </IonHeader>
+class MyHome extends React.Component<any, any> {
+    constructor(props:any){
+        super(props);
+        this.state={
+            items:[],
+            value: '',
+            isLoaded: false
+        }
+    }
 
-        <IonSearchbar placeholder="Search with name"/>
+    getResult = async (val:String) => {
+        const _this = this;
+        await axios.get(`http://localhost:8080/items/find-by-name/${val}/`)
+            .then(res => {
+                _this.setState({
+                    items: res.data,
+                    isLoaded: true
+                })
+                console.log(res.data);
+                console.log(res);
+            })
+            .catch(function (error) {
+                console.log(error);
+                _this.setState({
+                    isLoaded:false,
+                    error:error
+                })
+            })
+    };
 
-        <IonSearchbar placeholder="Search with category"/>
+    onChangeHandler = async (e:any) => {
+        this.getResult(e.target.value);
+        this.setState({ value: e.target.value });
+    };
 
-        <IonButton fill="outline">Scan</IonButton><br/>
+    render() {
+        const openScanner = async () => {
+            // const data = await BarcodeScanner.scan();
+            // console.log(`Barcode data: ${data.text}`);
+        };
+        return (
+            <IonPage>
+                <IonContent>
+                    <IonHeader>
+                        <IonToolbar>
+                            <IonTitle class="ion-text-center">Search</IonTitle>
+                        </IonToolbar>
+                    </IonHeader>
 
-        <IonButton fill="outline">Add Item</IonButton>
-
-
-
-        {/*<IonCard>*/}
-        {/*    <IonItem>*/}
-        {/*        <IonImg src = {imgBox} className="img"/>*/}
-        {/*        <IonLabel className="ion-text-wrap">*/}
-        {/*            <h2>这是个300cc 的烧瓶</h2>*/}
-        {/*        </IonLabel>*/}
-        {/*    </IonItem>*/}
-        {/*    <IonItem>*/}
-        {/*        <IonImg src = {imgTable} className="img"/>*/}
-        {/*        <IonLabel className="ion-text-wrap">*/}
-        {/*            <h2>多用途试验台</h2>*/}
-        {/*        </IonLabel>*/}
-        {/*    </IonItem>*/}
-        {/*    <IonItem>*/}
-        {/*        <IonImg src = {imgElebox} className="img"/>*/}
-        {/*        <IonLabel className="ion-text-wrap">*/}
-        {/*            <h2>实验室废水处理设备</h2>*/}
-        {/*        </IonLabel>*/}
-        {/*    </IonItem>*/}
-        {/*</IonCard>*/}
-
-        {/*<IonCard>*/}
-        {/*    <IonItem>*/}
-        {/*        <IonIcon icon={pin} slot="start" />*/}
-        {/*        <IonLabel>ion-item in a card, icon left, button right</IonLabel>*/}
-        {/*        <IonButton fill="outline" slot="end">View</IonButton>*/}
-        {/*    </IonItem>*/}
-
-        {/*    <IonCardContent>*/}
-        {/*        This is content, without any paragraph or header tags,*/}
-        {/*        within an ion-cardContent element.*/}
-        {/*    </IonCardContent>*/}
-        {/*</IonCard>*/}
-
-        {/*<IonCard>*/}
-        {/*    <IonItem href="#" className="ion-activated">*/}
-        {/*        <IonIcon icon={wifi} slot="start" />*/}
-        {/*        <IonLabel>Card Link Item 1 activated</IonLabel>*/}
-        {/*    </IonItem>*/}
-
-        {/*    <IonItem href="#">*/}
-        {/*        <IonIcon icon={wine} slot="start" />*/}
-        {/*        <IonLabel>Card Link Item 2</IonLabel>*/}
-        {/*    </IonItem>*/}
-
-        {/*    <IonItem className="ion-activated">*/}
-        {/*        <IonIcon icon={warning} slot="start" />*/}
-        {/*        <IonLabel>Card Button Item 1 activated</IonLabel>*/}
-        {/*    </IonItem>*/}
-
-        {/*    <IonItem>*/}
-        {/*        <IonIcon icon={walk} slot="start" />*/}
-        {/*        <IonLabel>Card Button Item 2</IonLabel>*/}
-        {/*    </IonItem>*/}
-        {/*</IonCard>*/}
-        </IonContent>
-    </IonPage>
-  );
-};
+                    <IonSearchbar value={this.state.value} onIonChange={e => this.onChangeHandler(e)} placeholder="Search with name"/>
+                    <IonList>
+                        {this.state.items.map((item: any) => {
+                            return (
+                                <IonItem button href='/tab4' key={item.id}>
+                                    <IonLabel>
+                                        {item.name}
+                                    </IonLabel>
+                                    <p>{item.statusEnum}</p>
+                                </IonItem>
+                            )
+                        })
+                        }
+                    </IonList>
+                    <IonSearchbar placeholder="Search with category"/>
+                    <IonButton strong expand="block" onClick={openScanner}>Scan</IonButton>
+                    <IonButton strong fill="clear" href="/tab3">Add Item</IonButton>
+                </IonContent>
+            </IonPage>
+        );
+    }
+}
 
 export default MyHome;
