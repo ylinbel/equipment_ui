@@ -7,7 +7,6 @@ import {
     IonButton,
     IonSearchbar, IonItem, IonList, IonLabel
 } from '@ionic/react';
-// import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner';
 import './MyHome.css';
 import React from "react";
 import axios from "axios";

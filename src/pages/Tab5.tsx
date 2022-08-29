@@ -72,13 +72,6 @@ const Tab5: React.FC = () => {
         </IonItem>
 
         <IonButton strong expand="block">Update</IonButton>
-
-
-
-
-
-
-
       </IonContent>
     </IonPage>
   );

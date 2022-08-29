@@ -4,11 +4,10 @@ import {
     IonPage,
     IonTitle,
     IonToolbar,
-    IonItem, IonInput, IonLabel, IonModal, IonDatetime, IonButton, IonRouterOutlet
+    IonItem, IonInput, IonLabel, IonButton, IonRouterOutlet
 } from '@ionic/react';
 import React, {useState} from "react";
 import {Route} from "react-router-dom";
-import MyHome from "./MyHome";
 import Register from "./Register";
 import './MyHome.css';
 // import {IonDatetimeButton} from '@ionic/react';
@@ -47,17 +46,6 @@ const Login: React.FC = () => {
                 <br/>
                 <IonButton fill="clear" strong size="small">Forget password?</IonButton> <br/>
                 <IonButton fill="clear" strong size="small" href="/register">Register</IonButton>
-
-
-
-
-
-
-
-
-
-
-
             </IonContent>
         </IonPage>
     );

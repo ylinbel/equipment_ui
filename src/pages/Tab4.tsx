@@ -124,8 +124,6 @@ class Tab4 extends React.Component<any, any> {
                     <br/>
                     <IonButton fill="clear" href="/Tab5" strong size="small">Update item</IonButton> <br/>
                     <IonButton fill="clear" href="/Tab5" strong size="small" onClick={() => this.deleteItem()}>Delete item</IonButton> <br/>
-
-
                 </IonContent>
             </IonPage>
         );

@@ -21,7 +21,6 @@ const Tab3: React.FC = () => {
   const [name, setName] = useState<string>();
   const [set, setSetName] = useState<string>();
   const [info, setInfo] = useState<string>();
-  const [time, setTime] = useState<string>();
   return (
     <IonPage>
       <IonContent fullscreen>
@@ -72,12 +71,6 @@ const Tab3: React.FC = () => {
         </IonItem>
 
         <IonButton strong expand="block">Add</IonButton>
-
-
-
-
-
-
       </IonContent>
     </IonPage>
   );

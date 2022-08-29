@@ -12,7 +12,6 @@ import {
 import { IonReactRouter } from '@ionic/react-router';
 import MyHome from './pages/MyHome';
 import MyItem from './pages/MyItem';
-import MyList from './pages/MyList';
 import MyCenter from './pages/MyCenter';
 import Register from "./pages/Register";
 import {
@@ -56,9 +55,6 @@ const App: React.FC = () => (
           </Route>
           <Route exact path="/myitem">
             <MyItem />
-          </Route>
-          <Route path="/mylist">
-            <MyList />
           </Route>
           <Route path="/mycenter">
               <MyCenter />

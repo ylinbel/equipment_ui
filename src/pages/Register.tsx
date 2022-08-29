@@ -4,12 +4,9 @@ import {
     IonPage,
     IonTitle,
     IonToolbar,
-    IonItem, IonInput, IonLabel, IonModal, IonButton, useIonPicker, IonCard,
+    IonItem, IonInput, IonLabel, IonButton, useIonPicker,
 } from '@ionic/react';
 import React, {useState} from "react";
-// import {IonDatetimeButton} from '@ionic/react';
-
-
 
 const Register: React.FC = () => {
     const [email, setEmail] = useState<string>();
@@ -17,9 +14,6 @@ const Register: React.FC = () => {
     const [password, setPassword] = useState<string>();
     const [repassword, setRePassword] = useState<string>();
     const [date, setDate] = useState<string>();
-    const [number, setNumber] = useState<number>();
-    const [present] = useIonPicker();
-    const [value, setValue] = useState('');
     return (
         <IonPage>
             <IonContent>
@@ -53,59 +47,8 @@ const Register: React.FC = () => {
                     <IonLabel position="stacked">Leaving Date</IonLabel>
                     <IonInput value={date} placeholder="DD/MM/YYYY" onIonChange={e => setDate(e.detail.value!)}> </IonInput>
                 </IonItem>
-
-                {/*check date format*/}
-
                 <br/>
                 <IonButton strong expand="block">Register</IonButton>
-
-
-                {/*<IonButton size="small"*/}
-                {/*    onClick={() =>*/}
-                {/*        present(*/}
-                {/*            [*/}
-                {/*                {*/}
-                {/*                    name: 'animal',*/}
-                {/*                    options: [*/}
-                {/*                        { text: 'Dog', value: 'dog' },*/}
-                {/*                        { text: 'Cat', value: 'cat' },*/}
-                {/*                        { text: 'Bird', value: 'bird' },*/}
-                {/*                    ],*/}
-                {/*                },*/}
-                {/*                {*/}
-                {/*                    name: 'vehicle',*/}
-                {/*                    options: [*/}
-                {/*                        { text: 'Car', value: 'car' },*/}
-                {/*                        { text: 'Truck', value: 'truck' },*/}
-                {/*                        { text: 'Bike', value: 'bike' },*/}
-                {/*                    ],*/}
-                {/*                },*/}
-                {/*            ],*/}
-                {/*            [*/}
-                {/*                {*/}
-                {/*                    text: 'Confirm',*/}
-                {/*                    handler: (selected) => {*/}
-                {/*                        setValue(`${selected.animal.value}, ${selected.vehicle.value}`)*/}
-                {/*                    },*/}
-                {/*                },*/}
-                {/*            ]*/}
-                {/*        )*/}
-                {/*    }*/}
-                {/*>*/}
-                {/*    Show Picker using para*/}
-                {/*</IonButton>*/}
-                {/*{value && (*/}
-                {/*    <div>Selected Value: {value}</div>*/}
-                {/*)}*/}
-
-
-
-
-
-
-
-
-
             </IonContent>
         </IonPage>
     );
