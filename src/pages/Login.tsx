@@ -10,18 +10,35 @@ import React, {useState} from "react";
 import {Route} from "react-router-dom";
 import Register from "./Register";
 import './MyHome.css';
-// import {IonDatetimeButton} from '@ionic/react';
-
-
+import axios from "axios";
 
 const Login: React.FC = () => {
-    const [name, setName] = useState<string>();
+    const [email, setEmail] = useState<string>();
     const [password, setPassword] = useState<string>();
+    const handleLogin = () => {
+            axios({
+                method: 'post',
+                url: 'http://localhost:8080/users/login',
+                params: {
+                    email: email,
+                    password: password
+                },
+                headers : {
+                    "Content-Type": "application/json",
+                }
+            }).catch(function (error) {
+                console.log(error);
+                alert("Email or password does not match, please try again.");
+                return;
+            });
+           window.location.href='/myHome';
+    }
+
     return (
         <IonPage>
             <IonRouterOutlet>
                 <Route exact path="/register">
-                    <Register />
+                    <Register/>
                 </Route>
             </IonRouterOutlet>
             <IonContent>
@@ -32,17 +49,19 @@ const Login: React.FC = () => {
                 </IonHeader>
 
                 <IonItem>
-                    <IonLabel position="stacked">Name</IonLabel>
-                    <IonInput value={name} placeholder="Enter Name" onIonChange={e => setName(e.detail.value!)}> </IonInput>
+                    <IonLabel position="stacked">Email</IonLabel>
+                    <IonInput value={email} placeholder="Enter Email"
+                              onIonChange={e => setEmail(e.detail.value!)}> </IonInput>
                 </IonItem>
 
 
                 <IonItem>
                     <IonLabel position="stacked">Password</IonLabel>
-                    <IonInput value={password} placeholder="Enter Password" onIonChange={e => setPassword(e.detail.value!)}> </IonInput>
+                    <IonInput value={password} placeholder="Enter Password"
+                              onIonChange={e => setPassword(e.detail.value!)}> </IonInput>
                 </IonItem>
 
-                <IonButton strong expand="block">Login</IonButton>
+                <IonButton strong expand="block" onClick={() => handleLogin()}>Login</IonButton>
                 <br/>
                 <IonButton fill="clear" strong size="small">Forget password?</IonButton> <br/>
                 <IonButton fill="clear" strong size="small" href="/register">Register</IonButton>

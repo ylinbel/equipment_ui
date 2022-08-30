@@ -17,6 +17,9 @@ import Register from "./pages/Register";
 import {
   searchOutline, personCircleOutline, listOutline
 } from 'ionicons/icons';
+import cors from 'cors';
+import express from 'express';
+
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -45,65 +48,69 @@ import UserManagement from "./pages/UserManagement";
 setupIonicReact();
 
 
-const App: React.FC = () => (
-  <IonApp>
-    <IonReactRouter>
-      <IonTabs>
-        <IonRouterOutlet>
-          <Route exact path="/myhome">
-            <MyHome />
-          </Route>
-          <Route exact path="/myitem">
-            <MyItem />
-          </Route>
-          <Route path="/mycenter">
-              <MyCenter />
+const App: React.FC = () => {
+  return(
+    <IonApp>
+      <IonReactRouter>
+        <IonTabs>
+          <IonRouterOutlet>
+            <Route exact path="/myhome">
+              <MyHome/>
             </Route>
-          <Route exact path="/">
-            <Redirect to="/tab1" />
-          </Route>
-          <Route exact path="/register">
-            <Register />
-          </Route>
-          <Route exact path="/login">
-            <Login />
-          </Route>
-          <Route exact path="/tab3">
-            <Tab3 />
-          </Route>
-          <Route exact path="/tab4">
-            <Tab4 />
-          </Route>
-          <Route exact path="/tab5">
-            <Tab5 />
-          </Route>
-          <Route exact path="/um">
-            <UserManagement />
-          </Route>
-        </IonRouterOutlet>
+            <Route exact path="/myitem">
+              <MyItem/>
+            </Route>
+            <Route path="/mycenter">
+              <MyCenter/>
+            </Route>
+            <Route exact path="/">
+              <Redirect to="/tab1"/>
+            </Route>
+            <Route exact path="/register">
+              <Register/>
+            </Route>
+            <Route exact path="/login">
+              <Login/>
+            </Route>
+            <Route exact path="/tab3">
+              <Tab3/>
+            </Route>
+            <Route exact path="/tab4">
+              <Tab4/>
+            </Route>
+            <Route exact path="/tab5">
+              <Tab5/>
+            </Route>
+            <Route exact path="/um">
+              <UserManagement/>
+            </Route>
+          </IonRouterOutlet>
 
-        <IonHeader class="ion-text-center">
-          <h3>Dynamics Lab</h3>
-        </IonHeader>
+          <IonHeader class="ion-text-center">
+            <h3>Dynamics Lab</h3>
+          </IonHeader>
 
-        <IonTabBar slot="bottom">
-          <IonTabButton tab="myitem" href="/myitem">
-            <IonIcon icon={listOutline} />
-            <IonLabel>List</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="myhome" href="/myhome">
-            <IonIcon icon={searchOutline} />
-            <IonLabel>Search</IonLabel>
-          </IonTabButton>
+          <IonTabBar slot="bottom">
+            <IonTabButton tab="myitem" href="/myitem">
+              <IonIcon icon={listOutline}/>
+              <IonLabel>List</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="myhome" href="/myhome">
+              <IonIcon icon={searchOutline}/>
+              <IonLabel>Search</IonLabel>
+            </IonTabButton>
             <IonTabButton tab="mycenter" href="/mycenter">
-              <IonIcon icon={personCircleOutline} />
+              <IonIcon icon={personCircleOutline}/>
               <IonLabel>Me</IonLabel>
             </IonTabButton>
-        </IonTabBar>
+          </IonTabBar>
 
-      </IonTabs>
-    </IonReactRouter>
-  </IonApp>
-);
+        </IonTabs>
+      </IonReactRouter>
+    </IonApp>
+  )
+}
+
+
 
 export default App;
