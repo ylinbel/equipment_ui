@@ -17,8 +17,6 @@ import Register from "./pages/Register";
 import {
   searchOutline, personCircleOutline, listOutline
 } from 'ionicons/icons';
-import cors from 'cors';
-import express from 'express';
 
 
 /* Core CSS required for Ionic components to work properly */

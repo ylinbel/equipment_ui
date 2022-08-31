@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import {
     IonContent,
     IonHeader,
@@ -9,71 +8,8 @@ import {
     IonItem, IonLabel, IonButton, IonList
 } from '@ionic/react';
 import './MyItem.css';
+import {getBorrowList, returnItem, repostDamaged} from './../services/myitem';
 
-// class ItemList extends React.Component<any, any>{
-//     constructor(props:any){
-//         super(props);
-//     }
-//     render(){
-//         return (
-//             this.state.data.map((item:any)=>{
-//                 <IonItem>
-//                     <IonLabel>
-//                         {item.name}
-//                     </IonLabel>
-//                     <IonButton fill="outline" slot="end">Return</IonButton>
-//                     <IonButton fill="outline" slot="end">Report damage</IonButton>
-//                 </IonItem>
-//             })
-//         )
-//     }
-// }
-
-// class MyItem extends React.Component<any, any> {
-//     constructor(props:any){
-//         super(props);
-//         this.state={
-//             items:[],
-//             isLoaded:false,
-//         }
-//     }
-//     componentDidMount(){
-//         const _this=this;
-//             .then(response => {
-//                 _this.setState({
-//                     items:response.data,
-//                     isLoaded:true
-//                 });
-//             })
-//             .catch(function (error) {
-//                 console.log(error);
-//                 _this.setState({
-//                     isLoaded:false,
-//                     error:error
-//                 })
-//             })
-//         console.log(this.state.items)
-//     }
-//     render(){
-//         const {items} = this.state;
-//         return (
-//             <IonPage>
-//                 <IonContent>
-//                     {items.map((home:any) => <div key={home.id}>{home.id}</div>)}
-//
-
-//
-//                     <IonCard>
-//                         <ItemList items={this.state.items} />
-//                     </IonCard>
-//
-//                 </IonContent>
-//             </IonPage>
-//         );
-//     }
-// }
-//
-// export default MyItem;
 
 class MyItem extends React.Component<any, any> {
     constructor(props:any){
@@ -86,7 +22,7 @@ class MyItem extends React.Component<any, any> {
 
     componentDidMount() {
         const _this=this;
-        axios.get(`http://localhost:8080/items/log/get-borrow-list/2`)
+        getBorrowList(2)
             .then(res => {
                 _this.setState({
                     data:res.data,
@@ -104,12 +40,12 @@ class MyItem extends React.Component<any, any> {
             })
     }
 
-    returnItem() {
-        axios.put('http://localhost:8080/items/6/false/return');
+    returnItemClick() {
+        returnItem(6);
     }
 
-    repostDamaged() {
-        axios.put('http://localhost:8080/items/6/true/return');
+    repostDamagedClick() {
+        repostDamaged(6)
     }
 
     render() {
@@ -128,8 +64,8 @@ class MyItem extends React.Component<any, any> {
                                     <IonLabel>
                                     {item.item.name}
                                     </IonLabel>
-                                    <IonButton fill="outline" slot="end" onClick={() => this.returnItem()}>Return</IonButton>
-                                    <IonButton fill="outline" slot="end" onClick={() => this.repostDamaged()}>Report damage</IonButton>
+                                    <IonButton fill="outline" slot="end" onClick={() => this.returnItemClick()}>Return</IonButton>
+                                    <IonButton fill="outline" slot="end" onClick={() => this.repostDamagedClick()}>Report damage</IonButton>
                                 </IonItem>
                             )
                         })
