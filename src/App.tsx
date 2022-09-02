@@ -14,6 +14,7 @@ import MyHome from './pages/MyHome';
 import MyItem from './pages/MyItem';
 import MyCenter from './pages/MyCenter';
 import Register from "./pages/Register";
+import AddCategory from "./pages/AddCategory";
 import {
   searchOutline, personCircleOutline, listOutline
 } from 'ionicons/icons';
@@ -38,10 +39,11 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import Login from "./pages/Login";
-import Tab3 from "./pages/Tab3";
+import AddItem from "./pages/AddItem";
 import Tab4 from "./pages/Tab4";
 import Tab5 from "./pages/Tab5";
 import UserManagement from "./pages/UserManagement";
+import AddLocation from "./pages/AddLocation";
 
 setupIonicReact();
 
@@ -70,8 +72,14 @@ const App: React.FC = () => {
             <Route exact path="/login">
               <Login/>
             </Route>
-            <Route exact path="/tab3">
-              <Tab3/>
+            <Route exact path="/addItem">
+              <AddItem/>
+            </Route>
+            <Route exact path="/addLocation">
+              <AddLocation/>
+            </Route>
+            <Route exact path="/addCategory">
+              <AddCategory/>
             </Route>
             <Route exact path="/tab4">
               <Tab4/>

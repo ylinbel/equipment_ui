@@ -2,7 +2,7 @@ import {
     IonAccordion, IonAccordionGroup, IonButton, IonCard,
     IonContent, IonHeader,
     IonItem,
-    IonLabel,
+    IonLabel, IonList,
     IonPage,
     IonTitle,
     IonToolbar
@@ -11,25 +11,26 @@ import './Tab3.css';
 import './MyItem.css';
 import React from "react";
 import axios from "axios";
+import {getItemWithId} from "../services/myitem";
 
 class Tab4 extends React.Component<any, any> {
     constructor(props:any) {
         super(props);
         this.state= {
             data: [],
-            isLoaded: false
+            isLoaded: false,
+            setItems: []
         }
     }
 
     componentDidMount() {
         const _this = this;
-        axios.get(`http://localhost:8080/items/3`)
+        getItemWithId()
             .then(function (res ) {
                 _this.setState( {
                     data:res.data,
                     isLoaded: true
                 })
-                console.log(res.data);
             })
     }
 
@@ -37,8 +38,50 @@ class Tab4 extends React.Component<any, any> {
         axios.delete('http://localhost:8080/items/31');
     }
 
+    findSet() {
+        axios.get(`http://localhost:8080/items/find-by-set/` + this.state.data.setName)
+            .then(res => {
+                console.log("find set")
+                console.log(res.data)
+                console.log(this.state.data.setName)
+                return (
+                    <IonCard>
+                    <IonList>
+                        {res.data.map((item: any) => {
+                            return (
+                                <IonItem key={item.id}>
+                                    <IonLabel>
+                                        {item.name}
+                                    </IonLabel>
+                                    <p>{item.statusEnum}</p>
+                                </IonItem>
+                            )})
+                        }
+                </IonList>
+                    </IonCard>)
+
+            })
+    }
+
+    getLocationDetail() {
+        if(this.state.data.location != undefined) {
+            if(this.state.data.location.layer == null) {
+                return(
+                    <p>{this.state.data.location.cabinet} - {this.state.data.location.name}</p>)
+            } else {
+                return (
+                    <p>{this.state.data.location.cabinet} - layer {this.state.data.location.layer} - {this.state.data.location.name}</p>)
+            }
+        }
+    }
+
+    getCategoryDetail() {
+        return (
+            <p>{this.state.data.category.parentLayerEnum} - layer {this.state.data.category.layer1} - {this.state.data.location.name}</p>)
+    }
+
+
     render() {
-        console.log(this.state.data.location);
         return (
             <IonPage>
                 <IonContent fullscreen>
@@ -76,17 +119,14 @@ class Tab4 extends React.Component<any, any> {
                             <IonLabel>
                                 Location
                             </IonLabel>
-                            {/*{*/}
-                            {/*    Object.values(this.state.data).map((item:any, k:any) =>*/}
-                            {/*        (<h4 key={k}>{item.id}</h4>))*/}
-                            {/*}*/}
-                            {/*cabinet - layer box...*/}
+                            {this.getLocationDetail()}
                         </IonItem>
 
                         <IonItem>
                             <IonLabel>
                                 Category
                             </IonLabel>
+                            {this.getCategoryDetail()}
                         </IonItem>
 
                         <IonItem>
@@ -106,13 +146,17 @@ class Tab4 extends React.Component<any, any> {
                                         Set Name
                                     </IonLabel>
                                     <p>{this.state.data.setName}</p>
-                                    <IonButton fill="outline" slot="end">Find Set</IonButton>
                                 </IonItem>
                                 <IonItem slot="content">
                                     <IonLabel>
                                         More Info
                                     </IonLabel>
                                     <p>{this.state.data.detailInformation}</p>
+                                </IonItem>
+                                <IonItem button slot="content" onClick={() => this.findSet()}>
+                                    <IonLabel>
+                                        Find Set
+                                    </IonLabel>
                                 </IonItem>
                             </IonAccordion>
                         </IonAccordionGroup>

@@ -8,7 +8,6 @@ import {
 } from '@ionic/react';
 import React, {useState} from "react";
 import axios from "axios";
-import {register} from "../serviceWorkerRegistration";
 
 const Register: React.FC = () => {
     const [name, setName] = useState<string>();
@@ -39,8 +38,25 @@ const Register: React.FC = () => {
 
             })
             alert("Registration Complete.");
+            storeData();
             window.location.href='/myHome';
         }
+    }
+
+    const storeData = () => {
+        console.log("store data")
+        axios({
+            method: 'get',
+            url: 'http://localhost:8080/users/find-by-email/' + email,
+        }).then(res => {
+            window.sessionStorage.setItem('userName', res.data.name);
+            window.sessionStorage.setItem('userEmail', res.data.email);
+            window.sessionStorage.setItem('userType', res.data.userTypeEnum);
+            window.sessionStorage.setItem('userId', res.data.id);
+        }).catch(function (error) {
+            console.log(error);
+            return;
+        });
     }
 
     return (
@@ -66,7 +82,7 @@ const Register: React.FC = () => {
 
                 <IonItem>
                     <IonLabel position="stacked" typeof="password">Password</IonLabel>
-                    <IonInput required={true} value={password} placeholder="Enter Password"
+                    <IonInput type="password" required={true} value={password} placeholder="Enter Password"
                               onIonChange={e => setPassword(e.detail.value!)}> </IonInput>
                 </IonItem>
 

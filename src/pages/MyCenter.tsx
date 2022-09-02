@@ -14,12 +14,13 @@ class MyCenter extends React.Component<any, any> {
 
   componentDidMount() {
     const _this=this;
-    axios.get(`http://localhost:8080/users/find-by-name/test user`)
+    axios.get(`http://localhost:8080/users/find-by-email/` + window.sessionStorage.getItem('userEmail'))
         .then(res => {
           _this.setState({
             data:res.data,
             isLoaded: true
           })
+          console.log(res.data);
           console.log(res.data);
           console.log(this.state.data);
         })
@@ -32,8 +33,13 @@ class MyCenter extends React.Component<any, any> {
         })
   }
 
+  clearData() {
+    window.sessionStorage.clear();
+  }
+
   render() {
-    console.log(this.state.data[0])
+    console.log("here");
+    console.log(window.sessionStorage.getItem('userEmail'));
     return (
         <IonPage>
           <IonContent>
@@ -48,31 +54,27 @@ class MyCenter extends React.Component<any, any> {
                 <IonLabel>
                   Name
                 </IonLabel>
+                {window.sessionStorage.getItem('userName')}
               </IonItem>
 
               <IonItem>
                 <IonLabel>
                   Email
                 </IonLabel>
-              </IonItem>
-
-              <IonItem>
-                <IonLabel>
-                  Password
-                </IonLabel>
-                <IonButton fill="outline" slot="end">Edit</IonButton>
+                {window.sessionStorage.getItem('userEmail')}
               </IonItem>
 
               <IonItem>
                 <IonLabel>
                   Usertype
                 </IonLabel>
-              </IonItem>
+                {window.sessionStorage.getItem('userType')}
 
+              </IonItem>
 
             </IonCard>
 
-            <IonButton fill="clear" strong size="small" href="/Login">Log out</IonButton>
+            <IonButton fill="clear" strong size="small" href="/Login" onClick={() => this.clearData()}>Log out</IonButton>
             <br/>
             <IonButton fill="clear" strong size="small" href="/um">More</IonButton>
 

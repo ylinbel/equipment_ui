@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import {
     IonContent,
     IonHeader,
@@ -22,7 +23,7 @@ class MyItem extends React.Component<any, any> {
 
     componentDidMount() {
         const _this=this;
-        getBorrowList(2)
+        getBorrowList(parseInt(window.sessionStorage.getItem('userId') as string))
             .then(res => {
                 _this.setState({
                     data:res.data,
@@ -40,12 +41,12 @@ class MyItem extends React.Component<any, any> {
             })
     }
 
-    returnItemClick() {
-        returnItem(6);
+    returnItemClick(itemId: number) {
+        returnItem(itemId);
     }
 
-    repostDamagedClick() {
-        repostDamaged(6)
+    repostDamagedClick(itemId: number) {
+        repostDamaged(itemId)
     }
 
     render() {
@@ -64,8 +65,8 @@ class MyItem extends React.Component<any, any> {
                                     <IonLabel>
                                     {item.item.name}
                                     </IonLabel>
-                                    <IonButton fill="outline" slot="end" onClick={() => this.returnItemClick()}>Return</IonButton>
-                                    <IonButton fill="outline" slot="end" onClick={() => this.repostDamagedClick()}>Report damage</IonButton>
+                                    <IonButton fill="outline" slot="end" onClick={() => this.returnItemClick(item.item.id)}>Return</IonButton>
+                                    <IonButton fill="outline" slot="end" onClick={() => this.repostDamagedClick(item.item.id)}>Report damage</IonButton>
                                 </IonItem>
                             )
                         })
