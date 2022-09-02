@@ -11,11 +11,9 @@ import {
   IonTitle,
   IonToolbar
 } from '@ionic/react';
-import './Tab3.css';
 import './MyItem.css';
-import React, { useState} from "react";
-import axios from "axios";
-import {checkLocationExist, createItem} from "../services/myitem";
+import React from "react";
+import {checkLocationExist, createItem, getCategory, getSubCategory} from "../services/myitem";
 
 class AddItem extends React.Component<any, any> {
   constructor(props: any) {
@@ -40,8 +38,7 @@ class AddItem extends React.Component<any, any> {
     checkLocationExist(this.state.location)
         .then(res => {
           this.setState({locationId: res.data.id})
-        }).catch(function (error) {
-      console.log(error);
+        }).catch(function () {
       alert("location not found, please create new location")
       return;
     });
@@ -63,7 +60,7 @@ class AddItem extends React.Component<any, any> {
 
   getLayers = async (parent: any) => {
     const _this = this;
-    await axios.get(`http://localhost:8080/category/find-all-subcategory/${parent}/`)
+    getSubCategory(parent)
         .then(res => {
           _this.setState({
             layer: res.data,
@@ -74,7 +71,7 @@ class AddItem extends React.Component<any, any> {
 
   getCategories = async (parent: any, subLayer: any) => {
     const _this = this;
-    await axios.get(`http://localhost:8080/category/find-by-layers/${parent}/${subLayer}`)
+    getCategory(parent, subLayer)
         .then(res => {
           _this.setState({
             category: res.data,

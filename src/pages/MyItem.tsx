@@ -29,8 +29,6 @@ class MyItem extends React.Component<any, any> {
                     data:res.data,
                     isLoaded: true
                 })
-                console.log(res.data);
-                console.log(this.state.data);
             })
             .catch(function (error) {
                 console.log(error);

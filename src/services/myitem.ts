@@ -22,6 +22,26 @@ export function getItemWithId() : Promise<any> {
     return axios.get(`${basicUrl}/items/3`);
 }
 
+export function getSubCategory(parent: any) :Promise<any> {
+    return axios.get(`${basicUrl}/category/find-all-subcategory/${parent}/`)
+}
+
+export function getCategory(parent: any, subLayer: any) :Promise<any> {
+    return axios.get(`${basicUrl}/category/find-by-layers/${parent}/${subLayer}`)
+}
+
+export function getItemWithName(val: string) :Promise<any> {
+    return axios.get(`${basicUrl}/items/find-by-name/${val}`)
+}
+
+export function getItemWithCategory(val: any) :Promise<any> {
+    return axios.get(`${basicUrl}/items/find-by-category/${val}`)
+}
+
+export function getUserWithEmail(email: any) :Promise<any> {
+    return axios.get(`${basicUrl}/users/find-by-email/${email}`)
+}
+
 export function createLocations(name: string, serial: string, layer: number, cabinet: string) : Promise<any> {
     return axios.post(`${basicUrl}/location`,{
         name: name,
@@ -63,5 +83,23 @@ export function createItem(name: string, serial: string, set: string, time: stri
     });
 }
 
+
+export function createUser(email: string, name: string, password: string, utilDate: string) : Promise<any> {
+    return axios.post(`${basicUrl}/users`,{
+        email: email,
+        name: name,
+        password: password,
+        utilDate: utilDate,
+        userTypeEnum: "StandardUser"
+    }, {
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    });
+}
+
+export function deleteItemWithId(itemId: number) : Promise<any> {
+    return axios.delete(`${basicUrl}/items/${itemId}`);
+}
 
 

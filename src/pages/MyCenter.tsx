@@ -20,9 +20,6 @@ class MyCenter extends React.Component<any, any> {
             data:res.data,
             isLoaded: true
           })
-          console.log(res.data);
-          console.log(res.data);
-          console.log(this.state.data);
         })
         .catch(function (error) {
           console.log(error);
@@ -38,8 +35,6 @@ class MyCenter extends React.Component<any, any> {
   }
 
   render() {
-    console.log("here");
-    console.log(window.sessionStorage.getItem('userEmail'));
     return (
         <IonPage>
           <IonContent>

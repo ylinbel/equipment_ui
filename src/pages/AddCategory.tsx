@@ -9,10 +9,9 @@ import {
     IonTitle,
     IonToolbar
 } from '@ionic/react';
-import './Tab3.css';
 import './MyItem.css';
 import React, {useState} from "react";
-import {createCategory, createLocations} from "../services/myitem";
+import {createCategory} from "../services/myitem";
 
 const AddCategory: React.FC = () => {
     const [parent, setParent] = useState<string>();
@@ -20,19 +19,13 @@ const AddCategory: React.FC = () => {
     const [subLayer, setSubLayer] = useState<string>();
 
     const addCategory = () => {
-        console.log(parent);
-        console.log(name);
-        console.log(subLayer);
         if (parent == '' || name == '' || subLayer == '') {
             alert("all fields are required.");
         } else {
             createCategory(name as string, subLayer as string, parent as string)
-                .catch(function (error) {
-                    console.log(error);
+                .catch(function () {
                     alert("Please try again");
-                    return;
                 })
-            alert("Category Added");
         }
     }
 

@@ -4,10 +4,11 @@ import {
     IonPage,
     IonTitle,
     IonToolbar,
-    IonItem, IonInput, IonLabel, IonButton, useIonPicker,
+    IonItem, IonInput, IonLabel, IonButton,
 } from '@ionic/react';
 import React, {useState} from "react";
 import axios from "axios";
+import {createUser, getUserWithEmail} from "../services/myitem";
 
 const Register: React.FC = () => {
     const [name, setName] = useState<string>();
@@ -22,21 +23,7 @@ const Register: React.FC = () => {
         if (password != repassword) {
             alert("password does not match.");
         } else {
-            axios({
-                method: 'post',
-                url: 'http://localhost:8080/users',
-                data: {
-                    email: email,
-                    name: name,
-                    password: password,
-                    utilDate: util,
-                    userTypeEnum: "StandardUser"
-                },
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-
-            })
+            createUser(email as string, name as string, password as string, util as string);
             alert("Registration Complete.");
             storeData();
             window.location.href='/myHome';
@@ -44,19 +31,16 @@ const Register: React.FC = () => {
     }
 
     const storeData = () => {
-        console.log("store data")
-        axios({
-            method: 'get',
-            url: 'http://localhost:8080/users/find-by-email/' + email,
-        }).then(res => {
+        getUserWithEmail(email)
+            .then(res => {
             window.sessionStorage.setItem('userName', res.data.name);
             window.sessionStorage.setItem('userEmail', res.data.email);
             window.sessionStorage.setItem('userType', res.data.userTypeEnum);
             window.sessionStorage.setItem('userId', res.data.id);
-        }).catch(function (error) {
-            console.log(error);
-            return;
-        });
+            }).catch(function (error) {
+                console.log(error);
+                return;
+            });
     }
 
     return (

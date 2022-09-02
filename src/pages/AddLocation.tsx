@@ -9,7 +9,6 @@ import {
   IonTitle,
   IonToolbar
 } from '@ionic/react';
-import './Tab3.css';
 import './MyItem.css';
 import React, {useState} from "react";
 import {createLocations} from "../services/myitem";

@@ -7,11 +7,10 @@ import {
     IonTitle,
     IonToolbar
 } from '@ionic/react';
-import './Tab3.css';
 import './MyItem.css';
 import React from "react";
 import axios from "axios";
-import {getItemWithId} from "../services/myitem";
+import {deleteItemWithId, getItemWithId} from "../services/myitem";
 
 class Tab4 extends React.Component<any, any> {
     constructor(props:any) {
@@ -19,14 +18,17 @@ class Tab4 extends React.Component<any, any> {
         this.state= {
             data: [],
             isLoaded: false,
-            setItems: []
+            setItems: [],
+            id: null
         }
     }
 
     componentDidMount() {
         const _this = this;
+        // console.log(window.location.search)
+        // _this.setState({id : window.location.search})
         getItemWithId()
-            .then(function (res ) {
+            .then(function (res) {
                 _this.setState( {
                     data:res.data,
                     isLoaded: true
@@ -35,7 +37,7 @@ class Tab4 extends React.Component<any, any> {
     }
 
     deleteItem() {
-        axios.delete('http://localhost:8080/items/31');
+        deleteItemWithId(this.state.id);
     }
 
     findSet() {
@@ -75,10 +77,10 @@ class Tab4 extends React.Component<any, any> {
         }
     }
 
-    getCategoryDetail() {
-        return (
-            <p>{this.state.data.category.parentLayerEnum} - layer {this.state.data.category.layer1} - {this.state.data.location.name}</p>)
-    }
+    // getCategoryDetail() {
+    //     return (
+    //         <p>{this.state.data.category.parentLayerEnum} - layer {this.state.data.category.layer1} - {this.state.data.location.name}</p>)
+    // }
 
 
     render() {
@@ -126,7 +128,7 @@ class Tab4 extends React.Component<any, any> {
                             <IonLabel>
                                 Category
                             </IonLabel>
-                            {this.getCategoryDetail()}
+                            {/*{this.getCategoryDetail()}*/}
                         </IonItem>
 
                         <IonItem>

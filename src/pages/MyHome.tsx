@@ -11,6 +11,7 @@ import {
 import './MyHome.css';
 import React, {useState} from "react";
 import axios from "axios";
+import {getCategory, getItemWithCategory, getItemWithName, getSubCategory} from "../services/myitem";
 
 class MyHome extends React.Component<any, any> {
     constructor(props:any){
@@ -29,7 +30,7 @@ class MyHome extends React.Component<any, any> {
 
     getLayers = async (parent: any) => {
         const _this = this;
-        await axios.get(`http://localhost:8080/category/find-all-subcategory/${parent}/`)
+        getSubCategory(parent)
             .then(res => {
                 _this.setState({
                     layer: res.data,
@@ -40,7 +41,7 @@ class MyHome extends React.Component<any, any> {
 
     getCategories = async (parent: any, subLayer: any) => {
         const _this = this;
-        await axios.get(`http://localhost:8080/category/find-by-layers/${parent}/${subLayer}`)
+        getCategory(parent,subLayer)
             .then(res => {
                 _this.setState({
                     category: res.data,
@@ -49,9 +50,9 @@ class MyHome extends React.Component<any, any> {
             })
     }
 
-    getResult = async (val:String) => {
+    getResult = async (val: string) => {
         const _this = this;
-        await axios.get(`http://localhost:8080/items/find-by-name/${val}/`)
+        getItemWithName(val)
             .then(res => {
                 _this.setState({
                     items: res.data,
@@ -91,7 +92,7 @@ class MyHome extends React.Component<any, any> {
 
     startSearch = async () => {
         const _this = this;
-        await axios.get(`http://localhost:8080/items/find-by-category/${this.state.categoryId}/`)
+        getItemWithCategory(this.state.categoryId)
             .then(res => {
                 _this.setState({
                     items: res.data,
@@ -107,6 +108,10 @@ class MyHome extends React.Component<any, any> {
                     error:error
                 })
             })
+    }
+
+    toItem = async (id : any) => {
+        window.location.href =`/tab4?id=${id}`
     }
 
     render() {
@@ -174,7 +179,7 @@ class MyHome extends React.Component<any, any> {
                     <IonList>
                         {this.state.items.map((item: any) => {
                             return (
-                                <IonItem button href='/tab4' key={item.id}>
+                                <IonItem button onClick={() => this.toItem(item.id)} key={item.id}>
                                     <IonLabel>
                                         {item.name}
                                     </IonLabel>
