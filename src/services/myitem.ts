@@ -18,8 +18,8 @@ export function checkLocationExist(location: string) : Promise<any> {
     return axios.get(`${basicUrl}/location/find-by-serial/${location}`);
 }
 
-export function getItemWithId() : Promise<any> {
-    return axios.get(`${basicUrl}/items/3`);
+export function getItemWithId(id: any) : Promise<any> {
+    return axios.get(`${basicUrl}/items/${id}`);
 }
 
 export function getSubCategory(parent: any) :Promise<any> {
@@ -69,6 +69,23 @@ export function createCategory(name: string, subLayer: string, parent: string) :
 
 export function createItem(name: string, serial: string, set: string, time: string, location: any, category: any, info: string) : Promise<any> {
     return axios.post(`${basicUrl}/items`,{
+        'name': name,
+        'serial': serial,
+        'setName': set,
+        'borrowTermEnum': time,
+        'location': {'id': location},
+        'category': {'id': category},
+        'detailInformation': info
+    }, {
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    });
+}
+
+export function updateItem(id: any, name: string, serial: string, set: string, time: string, location: any, category: any, info: string) : Promise<any> {
+    return axios.put(`${basicUrl}/items`,{
+        'id': id,
         'name': name,
         'serial': serial,
         'setName': set,

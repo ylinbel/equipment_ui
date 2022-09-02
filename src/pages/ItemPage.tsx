@@ -12,22 +12,20 @@ import React from "react";
 import axios from "axios";
 import {deleteItemWithId, getItemWithId} from "../services/myitem";
 
-class Tab4 extends React.Component<any, any> {
+class ItemPage extends React.Component<any, any> {
     constructor(props:any) {
         super(props);
         this.state= {
             data: [],
             isLoaded: false,
             setItems: [],
-            id: null
+            id: window.location.search.split('=')[1]
         }
     }
 
     componentDidMount() {
         const _this = this;
-        // console.log(window.location.search)
-        // _this.setState({id : window.location.search})
-        getItemWithId()
+        getItemWithId(this.state.id)
             .then(function (res) {
                 _this.setState( {
                     data:res.data,
@@ -43,25 +41,8 @@ class Tab4 extends React.Component<any, any> {
     findSet() {
         axios.get(`http://localhost:8080/items/find-by-set/` + this.state.data.setName)
             .then(res => {
-                console.log("find set")
-                console.log(res.data)
+                this.setState({setItems: res.data})
                 console.log(this.state.data.setName)
-                return (
-                    <IonCard>
-                    <IonList>
-                        {res.data.map((item: any) => {
-                            return (
-                                <IonItem key={item.id}>
-                                    <IonLabel>
-                                        {item.name}
-                                    </IonLabel>
-                                    <p>{item.statusEnum}</p>
-                                </IonItem>
-                            )})
-                        }
-                </IonList>
-                    </IonCard>)
-
             })
     }
 
@@ -77,10 +58,21 @@ class Tab4 extends React.Component<any, any> {
         }
     }
 
-    // getCategoryDetail() {
-    //     return (
-    //         <p>{this.state.data.category.parentLayerEnum} - layer {this.state.data.category.layer1} - {this.state.data.location.name}</p>)
-    // }
+    getCategoryDetail() {
+        if(this.state.data.category != undefined) {
+            return (
+            <p> {this.state.data.category.parentLayerEnum} - layer {this.state.data.category.layer1} - {this.state.data.category.name}</p>
+            )
+        }
+    }
+
+    toItem = async (id : any) => {
+        window.location.href =`/tab4?id=${id}`
+    }
+
+    toUpdate = async () => {
+        window.location.href =`/tab5?id=${this.state.id}`
+    }
 
 
     render() {
@@ -128,7 +120,7 @@ class Tab4 extends React.Component<any, any> {
                             <IonLabel>
                                 Category
                             </IonLabel>
-                            {/*{this.getCategoryDetail()}*/}
+                            {this.getCategoryDetail()}
                         </IonItem>
 
                         <IonItem>
@@ -161,19 +153,30 @@ class Tab4 extends React.Component<any, any> {
                                     </IonLabel>
                                 </IonItem>
                             </IonAccordion>
-                        </IonAccordionGroup>
 
+                                    {this.state.setItems.map((item: any) => {
+                                        return (
+                                            <IonItem button onClick={() => this.toItem(item.id)} key={item.id}>
+                                                <IonLabel>
+                                                    {item.name}
+                                                </IonLabel>
+                                                <p>{item.statusEnum}</p>
+                                            </IonItem>
+                                        )})
+                                    }
+
+                        </IonAccordionGroup>
                     </IonCard>
 
                     <br/>
                     <IonButton strong expand="block">Borrow</IonButton>
                     <br/>
-                    <IonButton fill="clear" href="/Tab5" strong size="small">Update item</IonButton> <br/>
-                    <IonButton fill="clear" href="/Tab5" strong size="small" onClick={() => this.deleteItem()}>Delete item</IonButton> <br/>
+                    <IonButton fill="clear" onClick={() => this.toUpdate()} strong size="small">Update item</IonButton> <br/>
+                    <IonButton fill="clear" strong size="small" onClick={() => this.deleteItem()}>Delete item</IonButton> <br/>
                 </IonContent>
             </IonPage>
         );
     };
 };
 
-export default Tab4;
+export default ItemPage;
