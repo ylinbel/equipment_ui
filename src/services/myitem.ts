@@ -10,7 +10,7 @@ export function returnItem(itemId: number) : Promise<any> {
     return axios.put(`${basicUrl}/items/${itemId}/false/return`);
 }
 
-export function repostDamaged(itemId: number) : Promise<any> {
+export function reportDamaged(itemId: number) : Promise<any> {
     return axios.put(`${basicUrl}/items/${itemId}/true/return`);
 }
 
@@ -20,6 +20,10 @@ export function checkLocationExist(location: string) : Promise<any> {
 
 export function getItemWithId(id: any) : Promise<any> {
     return axios.get(`${basicUrl}/items/${id}`);
+}
+
+export function restoreItemWithId(id: any) : Promise<any> {
+    return axios.put(`${basicUrl}/items/${id}/restore`);
 }
 
 export function getSubCategory(parent: any) :Promise<any> {
@@ -34,12 +38,28 @@ export function getItemWithName(val: string) :Promise<any> {
     return axios.get(`${basicUrl}/items/find-by-name/${val}`)
 }
 
+export function getUserWithName(val: string) :Promise<any> {
+    return axios.get(`${basicUrl}/users/find-by-name/${val}`)
+}
+
 export function getItemWithCategory(val: any) :Promise<any> {
     return axios.get(`${basicUrl}/items/find-by-category/${val}`)
 }
 
+export function getAllDamaged() :Promise<any> {
+    return axios.get(`${basicUrl}/items/find-by-status/DAMAGED`)
+}
+
 export function getUserWithEmail(email: any) :Promise<any> {
     return axios.get(`${basicUrl}/users/find-by-email/${email}`)
+}
+
+export function getAllOverDueNotReturnLogs() :Promise<any> {
+    return axios.get(`${basicUrl}/items/find-by-overdue-and-isReturn/true/false`)
+}
+
+export function getUsersWithUserType(userType: any) :Promise<any> {
+    return axios.get(`${basicUrl}/users/find-by-user-type/${userType}`)
 }
 
 export function createLocations(name: string, serial: string, layer: number, cabinet: string) : Promise<any> {

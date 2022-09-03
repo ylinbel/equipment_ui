@@ -2,7 +2,7 @@ import {
     IonAccordion, IonAccordionGroup, IonButton, IonCard,
     IonContent, IonHeader,
     IonItem,
-    IonLabel, IonList,
+    IonLabel,
     IonPage,
     IonTitle,
     IonToolbar
@@ -10,7 +10,7 @@ import {
 import './MyItem.css';
 import React from "react";
 import axios from "axios";
-import {deleteItemWithId, getItemWithId} from "../services/myitem";
+import {deleteItemWithId, getItemWithId, restoreItemWithId} from "../services/myitem";
 
 class ItemPage extends React.Component<any, any> {
     constructor(props:any) {
@@ -36,6 +36,10 @@ class ItemPage extends React.Component<any, any> {
 
     deleteItem() {
         deleteItemWithId(this.state.id);
+    }
+
+    restoreItem() {
+        restoreItemWithId(this.state.id);
     }
 
     findSet() {
@@ -67,7 +71,7 @@ class ItemPage extends React.Component<any, any> {
     }
 
     toItem = async (id : any) => {
-        window.location.href =`/tab4?id=${id}`
+        window.location.href =`/item?id=${id}`
     }
 
     toUpdate = async () => {
@@ -173,10 +177,11 @@ class ItemPage extends React.Component<any, any> {
                     <br/>
                     <IonButton fill="clear" onClick={() => this.toUpdate()} strong size="small">Update item</IonButton> <br/>
                     <IonButton fill="clear" strong size="small" onClick={() => this.deleteItem()}>Delete item</IonButton> <br/>
+                    <IonButton fill="clear" strong size="small" onClick={() => this.restoreItem()}>Restore item</IonButton> <br/>
                 </IonContent>
             </IonPage>
         );
     };
-};
+}
 
 export default ItemPage;

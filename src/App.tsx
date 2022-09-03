@@ -42,7 +42,7 @@ import Login from "./pages/Login";
 import AddItem from "./pages/AddItem";
 import ItemPage from "./pages/ItemPage";
 import UpdateItem from "./pages/UpdateItem";
-import UserManagement from "./pages/UserManagement";
+import Manager from "./pages/Manager";
 import AddLocation from "./pages/AddLocation";
 
 setupIonicReact();
@@ -81,14 +81,14 @@ const App: React.FC = () => {
             <Route exact path="/addCategory">
               <AddCategory/>
             </Route>
-            <Route exact path="/tab4">
+            <Route exact path="/item">
               <ItemPage/>
             </Route>
             <Route exact path="/tab5">
               <UpdateItem/>
             </Route>
             <Route exact path="/um">
-              <UserManagement/>
+              <Manager/>
             </Route>
           </IonRouterOutlet>
 

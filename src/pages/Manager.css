@@ -1,0 +1,12 @@
+.div-center{
+    text-align: center
+}
+.ion-padding {
+    padding: 0;
+    --padding-top: 0px;
+    --padding-bottom: 0px;
+}
+.item-native {
+    padding-top: 0;
+    padding-bottom: 0;
+}

@@ -5,12 +5,11 @@ import {
     IonTitle,
     IonToolbar,
     IonButton,
-    IonSearchbar, IonItem, IonList, IonLabel, IonSelectOption, IonSelect, IonCard
+    IonSearchbar, IonItem, IonList, IonLabel, IonSelectOption, IonSelect
 } from '@ionic/react';
 // import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner';
 import './MyHome.css';
-import React, {useState} from "react";
-import axios from "axios";
+import React from "react";
 import {getCategory, getItemWithCategory, getItemWithName, getSubCategory} from "../services/myitem";
 
 class MyHome extends React.Component<any, any> {
@@ -58,8 +57,6 @@ class MyHome extends React.Component<any, any> {
                     items: res.data,
                     isLoaded: true
                 })
-                console.log(res.data);
-                console.log(res);
             })
             .catch(function (error) {
                 console.log(error);
@@ -111,7 +108,7 @@ class MyHome extends React.Component<any, any> {
     }
 
     toItem = async (id : any) => {
-        window.location.href =`/tab4?id=${id}`
+        window.location.href =`/item?id=${id}`
     }
 
     render() {

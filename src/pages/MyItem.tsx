@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import {
     IonContent,
     IonHeader,
@@ -9,7 +8,7 @@ import {
     IonItem, IonLabel, IonButton, IonList
 } from '@ionic/react';
 import './MyItem.css';
-import {getBorrowList, returnItem, repostDamaged} from './../services/myitem';
+import {getBorrowList, returnItem, reportDamaged} from '../services/myitem';
 
 
 class MyItem extends React.Component<any, any> {
@@ -45,7 +44,7 @@ class MyItem extends React.Component<any, any> {
 
     reportDamagedClick(itemId: number) {
         alert("please return the broken item to lab manager")
-        repostDamaged(itemId)
+        reportDamaged(itemId)
     }
 
     render() {
