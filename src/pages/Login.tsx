@@ -26,8 +26,7 @@ const Login: React.FC = () => {
                 headers : {
                     "Content-Type": "application/json",
                 }
-            }).catch(function (error) {
-                console.log(error);
+            }).catch(function () {
                 alert("Email or password does not match, please try again.");
                 return;
             })

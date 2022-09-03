@@ -46,7 +46,6 @@ class ItemPage extends React.Component<any, any> {
         axios.get(`http://localhost:8080/items/find-by-set/` + this.state.data.setName)
             .then(res => {
                 this.setState({setItems: res.data})
-                console.log(this.state.data.setName)
             })
     }
 

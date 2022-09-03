@@ -30,7 +30,6 @@ class MyItem extends React.Component<any, any> {
                 })
             })
             .catch(function (error) {
-                console.log(error);
                 _this.setState({
                     isLoaded:false,
                     error:error

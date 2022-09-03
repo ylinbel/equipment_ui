@@ -7,7 +7,6 @@ import {
     IonItem, IonInput, IonLabel, IonButton,
 } from '@ionic/react';
 import React, {useState} from "react";
-import axios from "axios";
 import {createUser, getUserWithEmail} from "../services/myitem";
 
 const Register: React.FC = () => {

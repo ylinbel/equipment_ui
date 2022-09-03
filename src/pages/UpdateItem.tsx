@@ -55,7 +55,6 @@ class UpdateItem extends React.Component<any, any> {
             info: res.data.detailInformation,
             isLoaded: true
           })
-          console.log(res.data)
         })
   }
 
@@ -108,8 +107,7 @@ class UpdateItem extends React.Component<any, any> {
 
   updateItems = () => {
     updateItem(this.state.id, this.state.name, this.state.serial, this.state.set, this.state.returnTime, this.state.locationId, this.state.categoryId, this.state.info)
-        .catch(function (error) {
-          console.log(error);
+        .catch(function () {
           alert("Error")
           return;
         });

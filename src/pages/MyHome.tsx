@@ -59,7 +59,6 @@ class MyHome extends React.Component<any, any> {
                 })
             })
             .catch(function (error) {
-                console.log(error);
                 _this.setState({
                     isLoaded:false,
                     error:error
@@ -95,11 +94,8 @@ class MyHome extends React.Component<any, any> {
                     items: res.data,
                     isLoaded: true
                 })
-                console.log(res.data);
-                console.log(res);
             })
             .catch(function (error) {
-                console.log(error);
                 _this.setState({
                     isLoaded:false,
                     error:error

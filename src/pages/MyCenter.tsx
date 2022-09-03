@@ -8,7 +8,8 @@ class MyCenter extends React.Component<any, any> {
     super(props);
     this.state={
       data:[],
-      isLoaded: false
+      isLoaded: false,
+      error: null
     }
   }
 
@@ -22,7 +23,6 @@ class MyCenter extends React.Component<any, any> {
           })
         })
         .catch(function (error) {
-          console.log(error);
           _this.setState({
             isLoaded:false,
             error:error
@@ -78,6 +78,6 @@ class MyCenter extends React.Component<any, any> {
         </IonPage>
     );
   }
-};
+}
 
 export default MyCenter;

@@ -34,7 +34,6 @@ class Manager extends React.Component<any, any> {
             })
         getAllOverDueNotReturnLogs()
             .then(function (res) {
-                console.log(res.data)
                 _this.setState( {
                     overdueNotReturnItems:res.data,
                     isLoaded: true
