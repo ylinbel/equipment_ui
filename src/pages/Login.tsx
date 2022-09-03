@@ -80,7 +80,6 @@ const Login: React.FC = () => {
 
                 <IonButton strong expand="block" onClick={() => handleLogin()}>Login</IonButton>
                 <br/>
-                <IonButton fill="clear" strong size="small">Forget password?</IonButton> <br/>
                 <IonButton fill="clear" strong size="small" href="/register">Register</IonButton>
             </IonContent>
         </IonPage>

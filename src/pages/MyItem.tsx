@@ -43,7 +43,8 @@ class MyItem extends React.Component<any, any> {
         returnItem(itemId);
     }
 
-    repostDamagedClick(itemId: number) {
+    reportDamagedClick(itemId: number) {
+        alert("please return the broken item to lab manager")
         repostDamaged(itemId)
     }
 
@@ -59,12 +60,12 @@ class MyItem extends React.Component<any, any> {
                     <IonList>
                         {this.state.data.map((item: any) => {
                             return (
-                                <IonItem key={item.id}>
+                                <IonItem key={item.item.id}>
                                     <IonLabel>
                                     {item.item.name}
                                     </IonLabel>
                                     <IonButton fill="outline" slot="end" onClick={() => this.returnItemClick(item.item.id)}>Return</IonButton>
-                                    <IonButton fill="outline" slot="end" onClick={() => this.repostDamagedClick(item.item.id)}>Report damage</IonButton>
+                                    <IonButton fill="outline" slot="end" onClick={() => this.reportDamagedClick(item.item.id)}>Report damage</IonButton>
                                 </IonItem>
                             )
                         })
