@@ -11,7 +11,7 @@ import {
   IonTitle,
   IonToolbar
 } from '@ionic/react';
-import './MyItem.css';
+import './MyHome.css';
 import React from "react";
 import {checkLocationExist, createItem, getCategory, getSubCategory} from "../services/myitem";
 

@@ -1,4 +1,4 @@
-import { Redirect, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import {
   IonApp, IonHeader,
   IonIcon,
@@ -63,13 +63,10 @@ const App: React.FC = () => {
             <Route path="/mycenter">
               <MyCenter/>
             </Route>
-            <Route exact path="/">
-              <Redirect to="/tab1"/>
-            </Route>
             <Route exact path="/register">
               <Register/>
             </Route>
-            <Route exact path="/login">
+            <Route exact path="/">
               <Login/>
             </Route>
             <Route exact path="/addItem">

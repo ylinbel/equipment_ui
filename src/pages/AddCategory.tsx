@@ -9,7 +9,7 @@ import {
     IonTitle,
     IonToolbar
 } from '@ionic/react';
-import './MyItem.css';
+import './MyHome.css';
 import React, {useState} from "react";
 import {createCategory} from "../services/myitem";
 

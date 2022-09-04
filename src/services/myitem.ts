@@ -75,6 +75,10 @@ export function createLocations(name: string, serial: string, layer: number, cab
     });
 }
 
+export function borrowItemWithUserAndItem(itemId: number, userId: number) {
+    return axios.put(`${basicUrl}/items/${userId}/borrow/${itemId}`)
+}
+
 export function createCategory(name: string, subLayer: string, parent: string) : Promise<any> {
     return axios.post(`${basicUrl}/category`,{
         name: name,

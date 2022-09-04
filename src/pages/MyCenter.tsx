@@ -49,21 +49,22 @@ class MyCenter extends React.Component<any, any> {
                 <IonLabel>
                   Name
                 </IonLabel>
-                {window.sessionStorage.getItem('userName')}
+                <span>{window.sessionStorage.getItem('userName')}</span>
               </IonItem>
 
               <IonItem>
                 <IonLabel>
                   Email
                 </IonLabel>
-                {window.sessionStorage.getItem('userEmail')}
+                <span>{window.sessionStorage.getItem('userEmail')}</span>
               </IonItem>
 
               <IonItem>
                 <IonLabel>
                   Usertype
                 </IonLabel>
-                {window.sessionStorage.getItem('userType')}
+                <span>{window.sessionStorage.getItem('userType')}</span>
+
 
               </IonItem>
 

@@ -7,10 +7,10 @@ import {
     IonTitle,
     IonToolbar
 } from '@ionic/react';
-import './MyItem.css';
+import './MyHome.css';
 import React from "react";
 import axios from "axios";
-import {deleteItemWithId, getItemWithId, restoreItemWithId} from "../services/myitem";
+import {borrowItemWithUserAndItem, deleteItemWithId, getItemWithId, restoreItemWithId} from "../services/myitem";
 
 class ItemPage extends React.Component<any, any> {
     constructor(props:any) {
@@ -64,10 +64,18 @@ class ItemPage extends React.Component<any, any> {
     getCategoryDetail() {
         if(this.state.data.category != undefined) {
             return (
-            <p> {this.state.data.category.parentLayerEnum} - layer {this.state.data.category.layer1} - {this.state.data.category.name}</p>
+            <p> {this.state.data.category.parentLayerEnum} - {this.state.data.category.layer1} - {this.state.data.category.name}</p>
             )
         }
     }
+
+    borrowItem() {
+        borrowItemWithUserAndItem(this.state.id, parseInt(window.sessionStorage.getItem('userId') as string, 10) )
+            .catch(function () {
+            alert("Please try again");
+        })
+    }
+
 
     toItem = async (id : any) => {
         window.location.href =`/item?id=${id}`
@@ -172,7 +180,7 @@ class ItemPage extends React.Component<any, any> {
                     </IonCard>
 
                     <br/>
-                    <IonButton strong expand="block">Borrow</IonButton>
+                    <IonButton strong expand="block" onClick={() => this.borrowItem()}>Borrow</IonButton>
                     <br/>
                     <IonButton fill="clear" onClick={() => this.toUpdate()} strong size="small">Update item</IonButton> <br/>
                     <IonButton fill="clear" strong size="small" onClick={() => this.deleteItem()}>Delete item</IonButton> <br/>

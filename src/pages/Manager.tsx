@@ -65,7 +65,7 @@ class Manager extends React.Component<any, any> {
 
 
     toItem = async (id : any) => {
-        window.location.href =`/tab4?id=${id}`
+        window.location.href =`/item?id=${id}`
     }
 
     render() {

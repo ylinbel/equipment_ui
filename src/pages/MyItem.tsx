@@ -7,7 +7,7 @@ import {
     IonToolbar,
     IonItem, IonLabel, IonButton, IonList
 } from '@ionic/react';
-import './MyItem.css';
+import './MyHome.css';
 import {getBorrowList, returnItem, reportDamaged} from '../services/myitem';
 
 
@@ -24,6 +24,7 @@ class MyItem extends React.Component<any, any> {
         const _this=this;
         getBorrowList(parseInt(window.sessionStorage.getItem('userId') as string))
             .then(res => {
+                console.log(res.data)
                 _this.setState({
                     data:res.data,
                     isLoaded: true
@@ -46,6 +47,12 @@ class MyItem extends React.Component<any, any> {
         reportDamaged(itemId)
     }
 
+    handleOverDue(overDue: string) {
+        if (overDue == "true") {
+            return (<span className="overDue">Overdue</span>)
+        }
+    }
+
     render() {
         return (
             <IonPage>
@@ -57,13 +64,15 @@ class MyItem extends React.Component<any, any> {
                 <IonContent>
                     <IonList>
                         {this.state.data.map((item: any) => {
+                            const overDue = String(item.overDue);
                             return (
                                 <IonItem key={item.item.id}>
                                     <IonLabel>
                                     {item.item.name}
                                     </IonLabel>
-                                    <IonButton fill="outline" slot="end" onClick={() => this.returnItemClick(item.item.id)}>Return</IonButton>
-                                    <IonButton fill="outline" slot="end" onClick={() => this.reportDamagedClick(item.item.id)}>Report damage</IonButton>
+                                    {this.handleOverDue(overDue)}
+                                    <IonButton fill="outline" onClick={() => this.returnItemClick(item.item.id)}>Return</IonButton>
+                                    <IonButton fill="outline"  onClick={() => this.reportDamagedClick(item.item.id)}>Report damage</IonButton>
                                 </IonItem>
                             )
                         })
