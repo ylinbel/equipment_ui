@@ -46,6 +46,10 @@ export function getItemWithCategory(val: any) :Promise<any> {
     return axios.get(`${basicUrl}/items/find-by-category/${val}`)
 }
 
+export function getItemBySerialLike(text: any) {
+    return axios.get(`${basicUrl}/items/find-by-serial-like/${text}`)
+}
+
 export function getAllDamaged() :Promise<any> {
     return axios.get(`${basicUrl}/items/find-by-status/DAMAGED`)
 }

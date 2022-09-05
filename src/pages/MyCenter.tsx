@@ -70,7 +70,7 @@ class MyCenter extends React.Component<any, any> {
 
             </IonCard>
 
-            <IonButton fill="clear" strong size="small" href="/Login" onClick={() => this.clearData()}>Log out</IonButton>
+            <IonButton fill="clear" strong size="small" href="/" onClick={() => this.clearData()}>Log out</IonButton>
             <br/>
             <IonButton fill="clear" strong size="small" href="/um">More</IonButton>
 

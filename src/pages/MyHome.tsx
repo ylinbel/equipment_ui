@@ -108,10 +108,6 @@ class MyHome extends React.Component<any, any> {
     }
 
     render() {
-        const openScanner = async () => {
-            // const data = await BarcodeScanner.scan();
-            // console.log(`Barcode data: ${data.text}`);
-        };
         return (
             <IonPage>
                 <IonContent>
@@ -183,7 +179,7 @@ class MyHome extends React.Component<any, any> {
                         }
                     </IonList>
 
-                    <IonButton strong expand="block" onClick={openScanner}>Scan</IonButton>
+                    <IonButton strong expand="block" onClick={() => {window.location.href='/scanner'}}>Scan</IonButton>
                     <IonButton strong fill="clear" href="/addItem">Add Item</IonButton> <br/>
                     <IonButton strong fill="clear" href="/addLocation">Add Location</IonButton><br/>
                     <IonButton strong fill="clear" href="/addCategory">Add Category</IonButton>
