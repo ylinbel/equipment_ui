@@ -13,6 +13,7 @@ import { IonReactRouter } from '@ionic/react-router';
 import MyHome from './pages/MyHome';
 import MyItem from './pages/MyItem';
 import MyCenter from './pages/MyCenter';
+import Scanner from './pages/Scanner';
 import Register from "./pages/Register";
 import AddCategory from "./pages/AddCategory";
 import {
@@ -47,7 +48,6 @@ import AddLocation from "./pages/AddLocation";
 
 setupIonicReact();
 
-
 const App: React.FC = () => {
   return(
     <IonApp>
@@ -62,6 +62,9 @@ const App: React.FC = () => {
             </Route>
             <Route path="/mycenter">
               <MyCenter/>
+            </Route>
+            <Route path="/scanner">
+              <Scanner/>
             </Route>
             <Route exact path="/register">
               <Register/>

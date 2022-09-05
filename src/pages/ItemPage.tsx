@@ -70,10 +70,11 @@ class ItemPage extends React.Component<any, any> {
     }
 
     borrowItem() {
-        borrowItemWithUserAndItem(this.state.id, parseInt(window.sessionStorage.getItem('userId') as string, 10) )
+        borrowItemWithUserAndItem(this.state.id, parseInt(window.sessionStorage.getItem('userId') as string, 10))
             .catch(function () {
             alert("Please try again");
         })
+        window.location.reload();
     }
 
 

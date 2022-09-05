@@ -5,7 +5,7 @@ import {
     IonTitle,
     IonToolbar,
     IonButton,
-    IonSearchbar, IonAccordionGroup, IonItem, IonAccordion, IonLabel
+    IonSearchbar, IonAccordionGroup, IonItem, IonAccordion, IonLabel, IonCol
 } from '@ionic/react';
 import './Manager.css';
 import React from "react";
@@ -20,6 +20,8 @@ class Manager extends React.Component<any, any> {
             user: [],
             name: '',
             isLoaded: false,
+            damagedItemNumber: 0,
+            overdueItemNumber: 0,
         }
     }
 
@@ -29,6 +31,7 @@ class Manager extends React.Component<any, any> {
             .then(function (res) {
                 _this.setState( {
                     damagedItems:res.data,
+                    damagedItemNumber: res.data.length,
                     isLoaded: true
                 })
             })
@@ -36,6 +39,7 @@ class Manager extends React.Component<any, any> {
             .then(function (res) {
                 _this.setState( {
                     overdueNotReturnItems:res.data,
+                    overdueItemNumber: res.data.length,
                     isLoaded: true
                 })
             })
@@ -81,13 +85,13 @@ class Manager extends React.Component<any, any> {
                     <IonAccordionGroup>
                         <IonAccordion value="first">
                             <IonItem slot="header">
-                                <IonLabel>View All Damaged Items</IonLabel>
+                                <IonLabel>View All Damaged Items ({this.state.damagedItemNumber} in total)</IonLabel>
                             </IonItem>
                             {this.state.damagedItems.map((item: any) => {
                                 return (
                                     <IonItem key={item.id} className="ion-padding" slot="content" onClick={() => this.toItem(item.id)}>
                                         <IonLabel>
-                                            <p>Name:</p> {item.name}   <p>Serial:</p> {item.serial}
+                                            <IonCol><span>Name:</span> {item.name}</IonCol>   <IonCol><span>Serial:</span> {item.serial}</IonCol>
                                         </IonLabel>
                                     </IonItem>
 
@@ -96,13 +100,13 @@ class Manager extends React.Component<any, any> {
                         </IonAccordion>
                         <IonAccordion value="second">
                             <IonItem slot="header">
-                                <IonLabel>View All Overdue Not Return Items</IonLabel>
+                                <IonLabel>View All Overdue Not Return Items ({this.state.overdueItemNumber} in total)</IonLabel>
                             </IonItem>
                             {this.state.overdueNotReturnItems.map((item: any) => {
                                 return (
                                     <IonItem key={item.id} className="ion-padding" slot="content">
                                         <IonLabel>
-                                            <p>Item:</p> {item.item.name} <p>Item Serial:</p> {item.item.serial} <p>User Name:</p> {item.user.name}
+                                            <IonCol><span>Item:</span> {item.item.name}</IonCol> <IonCol><span>Item Serial:</span> {item.item.serial}</IonCol> <IonCol><span>User Name:</span> {item.user.name} </IonCol>
                                         </IonLabel>
                                     </IonItem>
 

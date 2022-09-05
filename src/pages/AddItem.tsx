@@ -88,6 +88,7 @@ class AddItem extends React.Component<any, any> {
           alert("Error")
           return;
         });
+    window.location.reload();
   }
 
   render() {

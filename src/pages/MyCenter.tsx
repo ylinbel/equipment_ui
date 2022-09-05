@@ -61,7 +61,7 @@ class MyCenter extends React.Component<any, any> {
 
               <IonItem>
                 <IonLabel>
-                  Usertype
+                  User type
                 </IonLabel>
                 <span>{window.sessionStorage.getItem('userType')}</span>
 

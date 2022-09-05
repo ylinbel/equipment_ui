@@ -31,6 +31,7 @@ const AddLocation: React.FC = () => {
           })
       alert("Location Added");
     }
+    window.location.reload();
   }
 
   return (
@@ -56,7 +57,6 @@ const AddLocation: React.FC = () => {
           <IonLabel position="stacked">Layer</IonLabel>
           <IonInput type="number" value={layer} placeholder="Enter Layer" onIonChange={e => setLayer(parseInt(e.detail.value!, 10))}> </IonInput>
         </IonItem>
-
 
         <IonItem>
           <IonLabel position="stacked">Cabinet</IonLabel>

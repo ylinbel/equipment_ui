@@ -31,7 +31,7 @@ const Login: React.FC = () => {
                 return;
             })
             storeData();
-            window.location.href='/myHome';
+            window.location.href='/myitem';
     }
 
     const storeData = () => {

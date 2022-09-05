@@ -27,6 +27,7 @@ const AddCategory: React.FC = () => {
                     alert("Please try again");
                 })
         }
+        window.location.reload();
     }
 
     return (

@@ -40,11 +40,13 @@ class MyItem extends React.Component<any, any> {
 
     returnItemClick(itemId: number) {
         returnItem(itemId);
+        window.location.reload();
     }
 
     reportDamagedClick(itemId: number) {
         alert("please return the broken item to lab manager")
         reportDamaged(itemId)
+        window.location.reload();
     }
 
     handleOverDue(overDue: string) {

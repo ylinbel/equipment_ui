@@ -7,10 +7,10 @@ import {
     IonButton,
     IonSearchbar, IonItem, IonList, IonLabel, IonSelectOption, IonSelect
 } from '@ionic/react';
-// import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner';
 import './MyHome.css';
 import React from "react";
 import {getCategory, getItemWithCategory, getItemWithName, getSubCategory} from "../services/myitem";
+
 
 class MyHome extends React.Component<any, any> {
     constructor(props:any){
