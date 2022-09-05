@@ -1,0 +1,18 @@
+button {
+    background: none;
+    color: #004080;
+    font-weight: bold;
+    font-family: Tahoma, serif;
+    font-size: 15px;
+    margin: 5px;
+}
+
+a{
+    text-decoration: none !important;
+    background: none;
+    color: #004080;
+    font-weight: bold;
+    font-family: Tahoma, serif;
+    font-size: 15px;
+    margin: 5px;
+}
