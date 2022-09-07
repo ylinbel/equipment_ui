@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const basicUrl = 'http://localhost:8080';
+const basicUrl = 'http://146.169.160.141:8080';
 
 export function getBorrowList(userId: number) : Promise<any> {
     return axios.get(`${basicUrl}/items/log/get-borrow-list/${userId}`);

@@ -1,8 +1,9 @@
 import React from 'react';
-import Html5QrcodePlugin from "./Html5QrcodePlugin";
-import {IonContent, IonHeader, IonPage, IonTitle, IonToolbar} from "@ionic/react";
+// import Html5QrcodePlugin from "./Html5QrcodePlugin";
+import {IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton, useIonAlert} from "@ionic/react";
 import "./Scanner.css"
 import {getItemBySerialLike} from "../services/myitem";
+import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner';
 
 
 class Scanner extends React.Component<any, any> {
@@ -30,6 +31,18 @@ class Scanner extends React.Component<any, any> {
             });
     }
 
+    openScanner() {
+        BarcodeScanner.scan().then(barcode => {
+            const [presentAlert] = useIonAlert();
+            presentAlert({
+                header: 'Alert',
+                subHeader: 'Important message',
+                message: 'Will search the item with serial number: ' + barcode,
+                buttons: ['OK'],
+            }).then(r => this.onNewScanResult(barcode));
+        });
+    }
+
     render() {
         return (
             <IonPage>
@@ -39,13 +52,16 @@ class Scanner extends React.Component<any, any> {
                                 <IonTitle class="ion-text-center">Scanner</IonTitle>
                             </IonToolbar>
                     </IonHeader>
-                    <div>
-                    <Html5QrcodePlugin
-                        fps={10}
-                        qrbox={250}
-                        disableFlip={false}
-                        qrCodeSuccessCallback={this.onNewScanResult}/>
-                    </div>
+                    {/*<div>*/}
+                    {/*<Html5QrcodePlugin*/}
+                    {/*    fps={10}*/}
+                    {/*    qrbox={250}*/}
+                    {/*    disableFlip={false}*/}
+                    {/*    qrCodeSuccessCallback={this.onNewScanResult}/>*/}
+                    {/*</div>*/}
+                    <IonContent>
+                        <IonButton onClick={this.openScanner}>Scan barcode</IonButton>
+                    </IonContent>
                 </IonContent>
             </IonPage>
                 );
