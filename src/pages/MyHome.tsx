@@ -9,8 +9,15 @@ import {
 } from '@ionic/react';
 import './MyHome.css';
 import React from "react";
-import {getCategory, getItemWithCategory, getItemWithName, getSubCategory} from "../services/myitem";
-
+import {
+    getCategory,
+    getItemBySerialLike,
+    getItemWithCategory,
+    getItemWithName,
+    getSubCategory
+} from "../services/myitem";
+import {getLoginFlagCookie} from "../services/cookieUtil";
+import {BarcodeScanner} from "@awesome-cordova-plugins/barcode-scanner";
 
 class MyHome extends React.Component<any, any> {
     constructor(props:any){
@@ -25,6 +32,13 @@ class MyHome extends React.Component<any, any> {
             category:[],
             categoryId : 0,
         }
+    }
+
+    componentDidMount() {
+        if(getLoginFlagCookie() == ''){
+            window.location.href =`/`;
+        }
+        this.onNewScanResult = this.onNewScanResult.bind(this);
     }
 
     getLayers = async (parent: any) => {
@@ -107,6 +121,26 @@ class MyHome extends React.Component<any, any> {
         window.location.href =`/item?id=${id}`
     }
 
+    onNewScanResult(decodedText: any) {
+        if (decodedText !== null) {
+            this.setState({text: decodedText})
+        }
+        this.findBySerialLike(decodedText)
+    }
+
+    findBySerialLike(decodeText: any) {
+        getItemBySerialLike(decodeText)
+            .then(res => {
+                this.setState({id: res.data[0].id})
+                window.location.href=`/item?id=${this.state.id}`
+            });
+    }
+
+    async openScanner() {
+        const data = await BarcodeScanner.scan();
+        this.onNewScanResult(data);
+    }
+
     render() {
         return (
             <IonPage>
@@ -179,7 +213,7 @@ class MyHome extends React.Component<any, any> {
                         }
                     </IonList>
 
-                    <IonButton strong expand="block" onClick={() => {window.location.href='/scanner'}}>Scan</IonButton>
+                    <IonButton strong expand="block" onClick={this.openScanner}>Scan</IonButton>
                     <IonButton strong fill="clear" href="/addItem">Add Item</IonButton> <br/>
                     <IonButton strong fill="clear" href="/addLocation">Add Location</IonButton><br/>
                     <IonButton strong fill="clear" href="/addCategory">Add Category</IonButton>

@@ -9,8 +9,14 @@ import {
 } from '@ionic/react';
 import './MyHome.css';
 import React from "react";
-import axios from "axios";
-import {borrowItemWithUserAndItem, deleteItemWithId, getItemWithId, restoreItemWithId} from "../services/myitem";
+import {
+    borrowItemWithUserAndItem,
+    deleteItemWithId, findItemsBySet,
+    getItemWithId,
+    restoreItemWithId
+} from "../services/myitem";
+import {getLoginFlagCookie} from "../services/cookieUtil";
+
 
 class ItemPage extends React.Component<any, any> {
     constructor(props:any) {
@@ -20,11 +26,14 @@ class ItemPage extends React.Component<any, any> {
             isLoaded: false,
             setItems: [],
             id: window.location.search.split('=')[1]
-        }
+        };
     }
 
     componentDidMount() {
         const _this = this;
+        if(getLoginFlagCookie() == ''){
+            window.location.href =`/`;
+        }
         getItemWithId(this.state.id)
             .then(function (res) {
                 _this.setState( {
@@ -43,7 +52,7 @@ class ItemPage extends React.Component<any, any> {
     }
 
     findSet() {
-        axios.get(`http://localhost:8080/items/find-by-set/` + this.state.data.setName)
+        findItemsBySet(this.state.data.setName)
             .then(res => {
                 this.setState({setItems: res.data})
             })
@@ -70,7 +79,7 @@ class ItemPage extends React.Component<any, any> {
     }
 
     borrowItem() {
-        borrowItemWithUserAndItem(this.state.id, parseInt(window.sessionStorage.getItem('userId') as string, 10))
+        borrowItemWithUserAndItem(this.state.id)
             .catch(function () {
             alert("Please try again");
         })
@@ -85,7 +94,11 @@ class ItemPage extends React.Component<any, any> {
     toUpdate = async () => {
         window.location.href =`/tab5?id=${this.state.id}`
     }
-
+    showBorrowButton(){
+        if(this.state.data.statusEnum == 'Available'){
+            return (<IonButton strong expand="block" onClick={() => this.borrowItem()}>Borrow</IonButton>);
+        }
+    }
 
     render() {
         return (
@@ -181,7 +194,7 @@ class ItemPage extends React.Component<any, any> {
                     </IonCard>
 
                     <br/>
-                    <IonButton strong expand="block" onClick={() => this.borrowItem()}>Borrow</IonButton>
+                    {this.showBorrowButton()}
                     <br/>
                     <IonButton fill="clear" onClick={() => this.toUpdate()} strong size="small">Update item</IonButton> <br/>
                     <IonButton fill="clear" strong size="small" onClick={() => this.deleteItem()}>Delete item</IonButton> <br/>

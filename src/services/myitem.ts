@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-const basicUrl = 'http://146.169.160.141:8080';
+const basicUrl = 'http://10.222.38.140:9999/dynamicslab';
 
-export function getBorrowList(userId: number) : Promise<any> {
-    return axios.get(`${basicUrl}/items/log/get-borrow-list/${userId}`);
+export function getBorrowList() : Promise<any> {
+    return axios.get(`${basicUrl}/items/log/get-borrow-list`);
 }
 
 export function returnItem(itemId: number) : Promise<any> {
@@ -38,8 +38,12 @@ export function getItemWithName(val: string) :Promise<any> {
     return axios.get(`${basicUrl}/items/find-by-name/${val}`)
 }
 
-export function getUserWithName(val: string) :Promise<any> {
-    return axios.get(`${basicUrl}/users/find-by-name/${val}`)
+export function getUserWithName() :Promise<any> {
+    return axios.get(`${basicUrl}/users/find-by-name`)
+}
+
+export function getUserListWithName(val: string) :Promise<any> {
+    return axios.get(`${basicUrl}/users/find-list-by-name/${val}`)
 }
 
 export function getItemWithCategory(val: any) :Promise<any> {
@@ -79,8 +83,8 @@ export function createLocations(name: string, serial: string, layer: number, cab
     });
 }
 
-export function borrowItemWithUserAndItem(itemId: number, userId: number) {
-    return axios.put(`${basicUrl}/items/${userId}/borrow/${itemId}`)
+export function borrowItemWithUserAndItem(itemId: number) {
+    return axios.put(`${basicUrl}/items/borrow/${itemId}`)
 }
 
 export function createCategory(name: string, subLayer: string, parent: string) : Promise<any> {
@@ -145,6 +149,28 @@ export function createUser(email: string, name: string, password: string, utilDa
 
 export function deleteItemWithId(itemId: number) : Promise<any> {
     return axios.delete(`${basicUrl}/items/${itemId}`);
+}
+
+export function login(email: string|undefined, password: string|undefined) : Promise<any> {
+    return axios({
+        method: 'post',
+        url: `${basicUrl}/users/login`,
+        params: {
+            email: email,
+            password: password
+        },
+        headers : {
+            "Content-Type": "application/json",
+        }
+    })
+}
+
+export function findItemsBySet(setName: string) : Promise<any> {
+    return axios.get(`${basicUrl}/items/find-by-set/` + setName);
+}
+
+export function logout() : Promise<any> {
+    return axios.post(`${basicUrl}/users/logout`);
 }
 
 

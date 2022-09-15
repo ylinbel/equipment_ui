@@ -1,6 +1,5 @@
 import React from 'react';
-// import Html5QrcodePlugin from "./Html5QrcodePlugin";
-import {IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton, useIonAlert} from "@ionic/react";
+import {IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton} from "@ionic/react";
 import "./Scanner.css"
 import {getItemBySerialLike} from "../services/myitem";
 import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner';
@@ -31,16 +30,9 @@ class Scanner extends React.Component<any, any> {
             });
     }
 
-    openScanner() {
-        BarcodeScanner.scan().then(barcode => {
-            const [presentAlert] = useIonAlert();
-            presentAlert({
-                header: 'Alert',
-                subHeader: 'Important message',
-                message: 'Will search the item with serial number: ' + barcode,
-                buttons: ['OK'],
-            }).then(r => this.onNewScanResult(barcode));
-        });
+    async openScanner() {
+        const data = await BarcodeScanner.scan();
+        this.onNewScanResult(data);
     }
 
     render() {

@@ -1,7 +1,8 @@
 import React from 'react';
 import { IonContent, IonHeader, IonPage, IonCard, IonTitle, IonToolbar, IonItem, IonLabel, IonButton } from '@ionic/react';
 import './MyHome.css';
-import axios from "axios";
+import {getLoginFlagCookie} from "../services/cookieUtil";
+import {getUserWithName, logout} from "../services/myitem";
 
 class MyCenter extends React.Component<any, any> {
   constructor(props:any){
@@ -15,7 +16,10 @@ class MyCenter extends React.Component<any, any> {
 
   componentDidMount() {
     const _this=this;
-    axios.get(`http://localhost:8080/users/find-by-email/` + window.sessionStorage.getItem('userEmail'))
+    if(getLoginFlagCookie() == ''){
+      window.location.href =`/`;
+    }
+    getUserWithName()
         .then(res => {
           _this.setState({
             data:res.data,
@@ -31,7 +35,7 @@ class MyCenter extends React.Component<any, any> {
   }
 
   clearData() {
-    window.sessionStorage.clear();
+    logout().then(res => {window.location.href =`/`;});
   }
 
   render() {
@@ -49,21 +53,21 @@ class MyCenter extends React.Component<any, any> {
                 <IonLabel>
                   Name
                 </IonLabel>
-                <span>{window.sessionStorage.getItem('userName')}</span>
+                <span>{this.state.data.name}</span>
               </IonItem>
 
               <IonItem>
                 <IonLabel>
                   Email
                 </IonLabel>
-                <span>{window.sessionStorage.getItem('userEmail')}</span>
+                <span>{this.state.data.email}</span>
               </IonItem>
 
               <IonItem>
                 <IonLabel>
                   User type
                 </IonLabel>
-                <span>{window.sessionStorage.getItem('userType')}</span>
+                <span>{this.state.data.userTypeEnum}</span>
 
 
               </IonItem>

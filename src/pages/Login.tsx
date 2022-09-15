@@ -10,43 +10,18 @@ import React, {useState} from "react";
 import {Route} from "react-router-dom";
 import Register from "./Register";
 import './MyHome.css';
-import axios from "axios";
+import {login} from "../services/myitem";
 
 const Login: React.FC = () => {
     const [email, setEmail] = useState<string>();
     const [password, setPassword] = useState<string>();
     const handleLogin = () => {
-            axios({
-                method: 'post',
-                url: 'http://localhost:8080/users/login',
-                params: {
-                    email: email,
-                    password: password
-                },
-                headers : {
-                    "Content-Type": "application/json",
-                }
+            login(email, password).then(res => {
+                window.location.href='/myitem';
             }).catch(function () {
                 alert("Email or password does not match, please try again.");
                 return;
             })
-            storeData();
-            window.location.href='/myitem';
-    }
-
-    const storeData = () => {
-        axios({
-            method: 'get',
-            url: `http://localhost:8080/users/find-by-email/${email}`,
-        }).then(res => {
-            window.sessionStorage.setItem('userName', res.data.name);
-            window.sessionStorage.setItem('userEmail', res.data.email);
-            window.sessionStorage.setItem('userType', res.data.userTypeEnum);
-            window.sessionStorage.setItem('userId', res.data.id);
-        }).catch(function (error) {
-            console.log(error);
-            return;
-        });
 
     }
 

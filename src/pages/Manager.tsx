@@ -9,7 +9,13 @@ import {
 } from '@ionic/react';
 import './Manager.css';
 import React from "react";
-import {getAllDamaged, getAllOverDueNotReturnLogs, getUsersWithUserType, getUserWithName} from "../services/myitem";
+import {
+    getAllDamaged,
+    getAllOverDueNotReturnLogs,
+    getUserListWithName,
+    getUsersWithUserType,
+    getUserWithName
+} from "../services/myitem";
 
 class Manager extends React.Component<any, any> {
     constructor(props:any) {
@@ -47,7 +53,7 @@ class Manager extends React.Component<any, any> {
 
     onChangeHandler = async (e:any) => {
         this.setState({ name: e.target.value });
-        getUserWithName(this.state.name)
+        getUserListWithName(this.state.name)
             .then(res => {
                 this.setState({
                     user: res.data,

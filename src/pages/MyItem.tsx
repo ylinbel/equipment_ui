@@ -9,6 +9,7 @@ import {
 } from '@ionic/react';
 import './MyHome.css';
 import {getBorrowList, returnItem, reportDamaged} from '../services/myitem';
+import {getLoginFlagCookie} from '../services/cookieUtil';
 
 
 class MyItem extends React.Component<any, any> {
@@ -22,9 +23,11 @@ class MyItem extends React.Component<any, any> {
 
     componentDidMount() {
         const _this=this;
-        getBorrowList(parseInt(window.sessionStorage.getItem('userId') as string))
+        if(getLoginFlagCookie() == ''){
+            window.location.href =`/`;
+        }
+        getBorrowList()
             .then(res => {
-                console.log(res.data)
                 _this.setState({
                     data:res.data,
                     isLoaded: true
@@ -39,14 +42,12 @@ class MyItem extends React.Component<any, any> {
     }
 
     returnItemClick(itemId: number) {
-        returnItem(itemId);
-        window.location.reload();
+        returnItem(itemId).then((res) => {window.location.reload()});
     }
 
     reportDamagedClick(itemId: number) {
         alert("please return the broken item to lab manager")
-        reportDamaged(itemId)
-        window.location.reload();
+        reportDamaged(itemId).then((res) => {window.location.reload()});
     }
 
     handleOverDue(overDue: string) {
