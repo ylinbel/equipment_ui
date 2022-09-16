@@ -42,12 +42,20 @@ class MyItem extends React.Component<any, any> {
     }
 
     returnItemClick(itemId: number) {
-        returnItem(itemId).then((res) => {window.location.reload()});
+        returnItem(itemId).then((res) => {
+            window.location.reload()
+        }).catch((res) => {
+            alert("This item was already returned")
+        });
     }
 
     reportDamagedClick(itemId: number) {
         alert("please return the broken item to lab manager")
-        reportDamaged(itemId).then((res) => {window.location.reload()});
+        reportDamaged(itemId).then((res) => {
+            window.location.reload()
+        }).catch((res) => {
+            alert("This item was already returned")
+        });
     }
 
     handleOverDue(overDue: string) {

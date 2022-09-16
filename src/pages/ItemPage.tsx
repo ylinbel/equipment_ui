@@ -44,11 +44,19 @@ class ItemPage extends React.Component<any, any> {
     }
 
     deleteItem() {
-        deleteItemWithId(this.state.id);
+        deleteItemWithId(this.state.id).then(function () {
+            alert("Delete successfully");
+        }).catch(function () {
+            alert("Please try again");
+        })
     }
 
     restoreItem() {
-        restoreItemWithId(this.state.id);
+        restoreItemWithId(this.state.id).then(function () {
+            window.location.reload();
+        }).catch(function () {
+            alert("Please try again");
+        })
     }
 
     findSet() {
@@ -56,6 +64,14 @@ class ItemPage extends React.Component<any, any> {
             .then(res => {
                 this.setState({setItems: res.data})
             })
+    }
+
+    borrowItem() {
+        borrowItemWithUserAndItem(this.state.id).then(function () {
+            window.location.reload();
+        }).catch(function () {
+            alert("Please try again");
+        })
     }
 
     getLocationDetail() {
@@ -76,14 +92,6 @@ class ItemPage extends React.Component<any, any> {
             <p> {this.state.data.category.parentLayerEnum} - {this.state.data.category.layer1} - {this.state.data.category.name}</p>
             )
         }
-    }
-
-    borrowItem() {
-        borrowItemWithUserAndItem(this.state.id)
-            .catch(function () {
-            alert("Please try again");
-        })
-        window.location.reload();
     }
 
 
