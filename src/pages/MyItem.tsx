@@ -82,8 +82,8 @@ class MyItem extends React.Component<any, any> {
                                     {item.item.name}
                                     </IonLabel>
                                     {this.handleOverDue(overDue)}
-                                    <IonButton fill="outline" onClick={() => this.returnItemClick(item.item.id)}>Return</IonButton>
-                                    <IonButton fill="outline"  onClick={() => this.reportDamagedClick(item.item.id)}>Report damage</IonButton>
+                                    <IonButton fill="outline" onClick={() => this.reportDamagedClick(item.item.id)}>Damage</IonButton>
+                                    <IonButton fill="outline" color="success" onClick={() => this.returnItemClick(item.item.id)}>Return</IonButton>
                                 </IonItem>
                             )
                         })

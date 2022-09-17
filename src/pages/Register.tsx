@@ -52,31 +52,31 @@ const Register: React.FC = () => {
                 </IonHeader>
 
                 <IonItem>
-                    <IonLabel position="stacked">Name</IonLabel>
+                    <IonLabel position="stacked">Name* (Please use your college registered name) </IonLabel>
                     <IonInput value={name} placeholder="Enter Name"
                               onIonChange={e => setName(e.detail.value!)}> </IonInput>
                 </IonItem>
 
                 <IonItem>
-                    <IonLabel position="stacked" inputMode="email">Email</IonLabel>
+                    <IonLabel position="stacked" inputMode="email">Email* (Please use your college email) </IonLabel>
                     <IonInput type="email" required={true} value={email} placeholder="Enter Email"
                               onIonChange={e => setEmail(e.detail.value!)}> </IonInput>
                 </IonItem>
 
                 <IonItem>
-                    <IonLabel position="stacked" typeof="password">Password</IonLabel>
+                    <IonLabel position="stacked" typeof="password">Password* </IonLabel>
                     <IonInput type="password" required={true} value={password} placeholder="Enter Password"
                               onIonChange={e => setPassword(e.detail.value!)}> </IonInput>
                 </IonItem>
 
                 <IonItem>
-                    <IonLabel position="stacked">Reenter Password</IonLabel>
+                    <IonLabel position="stacked">Reenter Password*</IonLabel>
                     <IonInput required={true} value={repassword} placeholder="Enter Password"
                               onIonChange={e => setRepassword(e.detail.value!)}> </IonInput>
                 </IonItem>
 
                 <IonItem>
-                    <IonLabel position="stacked">Leaving Date</IonLabel>
+                    <IonLabel position="stacked">Leaving Date*</IonLabel>
                     <IonInput type="date" required={true} value={util} placeholder="DD/MM/YYYY"
                               onIonChange={e => setUtil(e.detail.value!)}> </IonInput>
                 </IonItem>
